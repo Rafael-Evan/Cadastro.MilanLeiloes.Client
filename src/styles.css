@@ -1,0 +1,12 @@
+/* You can add global styles to this file, and also import other style files */
+@import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+@import '../node_modules/@fortawesome/fontawesome-free/css/all.min.css';
+@import '../node_modules/@fancyapps/fancybox/dist/jquery.fancybox.min.css';
+@import '../node_modules/owl.carousel/dist/assets/owl.carousel.min.css';
+@import '../node_modules/owl.carousel/dist/assets/owl.theme.default.css';
+@import '../node_modules/@angular/material/prebuilt-themes/indigo-pink.css';
+
+
+#toast-container > div {
+    opacity:1;
+}
