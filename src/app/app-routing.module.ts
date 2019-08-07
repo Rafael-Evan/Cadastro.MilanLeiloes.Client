@@ -2,13 +2,24 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DocumentosComponent } from './documentos/documentos.component';
 import { HomeComponent } from './home/home.component';
+import { UserComponent } from './user/user.component';
+import { LoginComponent } from './user/login/login.component';
+import { RegistrationComponent } from './user/registration/registration.component';
 
 
 const routes: Routes = [
-  {path: 'documentos', component: DocumentosComponent},
-  {path: 'home', component: HomeComponent},
-  {path: '', redirectTo: 'home', pathMatch: 'full'},
-  {path: '**', redirectTo: 'home'}
+  {
+    path: 'user', component: UserComponent,
+    children: [
+      { path: 'login', component: LoginComponent },
+      { path: 'registration', component: RegistrationComponent },
+    ]
+  },
+
+  { path: 'documentos', component: DocumentosComponent },
+  { path: 'home', component: HomeComponent },
+  { path: '', redirectTo: 'user/login', pathMatch: 'full' },
+  { path: '**', redirectTo: 'user/login' }
 ];
 
 @NgModule({

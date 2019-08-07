@@ -8,7 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
  
 import { ToastrModule } from 'ngx-toastr';
 
@@ -18,6 +18,8 @@ import { NavComponent } from './nav/nav.component';
 import { DocumentosComponent } from './documentos/documentos.component';
 import { HomeComponent } from './home/home.component';
 import { UserComponent } from './user/user.component';
+import { LoginComponent } from './user/login/login.component';
+import { RegistrationComponent } from './user/registration/registration.component';
 
 // Client id for the facebook oauth. This is used for validation of our application to facebook.
 // https://developers.facebook.com/
@@ -35,12 +37,15 @@ let config = new AuthServiceConfig([
       NavComponent,
       DocumentosComponent,
       HomeComponent,
-      UserComponent
+      UserComponent,
+      LoginComponent,
+      RegistrationComponent
    ],
    imports: [
       BrowserModule,
       BrowserAnimationsModule,
       FormsModule,
+      ReactiveFormsModule,
       ToastrModule.forRoot(),
       SocialLoginModule.initialize(config),
       HttpClientModule,
