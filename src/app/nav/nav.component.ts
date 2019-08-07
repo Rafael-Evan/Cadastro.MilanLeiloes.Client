@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService, FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
 import { Glob } from 'glob';
 declare var FB: any;
-declare var GL: any;
 
 @Component({
   selector: 'app-nav',
@@ -17,17 +16,6 @@ export class NavComponent implements OnInit {
   constructor(private _socioAuthServ: AuthService) { }
 
    // Method to sign in with facebook.
-   signInGoogle(platform: string): void {
-    platform = GoogleLoginProvider.PROVIDER_ID;
-    this._socioAuthServ.signIn(platform).then(
-      (response) => {
-        console.log(platform + " logged in user data is= ", response);
-        this.user = response;
-      }
-    );
-  }
- 
-  // Method to sign in with facebook.
   signIn(platform: string): void {
     platform = FacebookLoginProvider.PROVIDER_ID;
     this._socioAuthServ.signIn(platform).then(

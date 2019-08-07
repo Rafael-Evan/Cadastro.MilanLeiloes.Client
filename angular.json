@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular-facebook-signin": {
+    "CadastroMilanLeiloes": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/angular-facebook-signin",
+            "outputPath": "dist/CadastroMilanLeiloes",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -63,18 +63,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "angular-facebook-signin:build"
+            "browserTarget": "CadastroMilanLeiloes:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "angular-facebook-signin:build:production"
+              "browserTarget": "CadastroMilanLeiloes:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular-facebook-signin:build"
+            "browserTarget": "CadastroMilanLeiloes:build"
           }
         },
         "test": {
@@ -111,15 +111,15 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "angular-facebook-signin:serve"
+            "devServerTarget": "CadastroMilanLeiloes:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "angular-facebook-signin:serve:production"
+              "devServerTarget": "CadastroMilanLeiloes:serve:production"
             }
           }
         }
       }
     }},
-  "defaultProject": "angular-facebook-signin"
+  "defaultProject": "CadastroMilanLeiloes"
 }
