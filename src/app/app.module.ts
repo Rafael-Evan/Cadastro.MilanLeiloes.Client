@@ -9,7 +9,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
- 
 import { ToastrModule } from 'ngx-toastr';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -23,8 +22,9 @@ import { RegistrationComponent } from './user/registration/registration.componen
 
 // Client id for the facebook oauth. This is used for validation of our application to facebook.
 // https://developers.facebook.com/
-const facebook_oauth_client_id: string = 'Your-facebook-client-id.';
-let config = new AuthServiceConfig([
+// tslint:disable-next-line: variable-name
+const facebook_oauth_client_id = 'Your-facebook-client-id.';
+const config = new AuthServiceConfig([
   {
     id: FacebookLoginProvider.PROVIDER_ID,
     provider: new FacebookLoginProvider(facebook_oauth_client_id)

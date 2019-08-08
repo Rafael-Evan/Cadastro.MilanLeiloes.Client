@@ -21,7 +21,7 @@ export class MilanAuthService {
           const user = response;
           if (user) {
             localStorage.setItem('token', user.token);
-            this.decodedToken = this.jwtHelper.decodeToken(user.token)
+            this.decodedToken = this.jwtHelper.decodeToken(user.token);
           }
         })
       );
@@ -34,7 +34,7 @@ export class MilanAuthService {
 
   loggedIn() {
     const token = localStorage.getItem('token');
-    return this.jwtHelper.isTokenExpired(token);
+    return !this.jwtHelper.isTokenExpired(token);
   }
 
 }
