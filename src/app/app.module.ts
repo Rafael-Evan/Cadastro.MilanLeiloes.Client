@@ -2,14 +2,20 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 // Importing social login module and facebook login provider.
-import { SocialLoginModule, AuthServiceConfig, FacebookLoginProvider} from 'angularx-social-login';
+import { SocialLoginModule, AuthServiceConfig, FacebookLoginProvider } from 'angularx-social-login';
 
 import { HttpClientModule } from '@angular/common/http';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
+
+// Uppy Module
+import {UppyModule} from './uppy/uppy.module';
+
+// Webcam
+import { WebcamModule } from 'ngx-webcam';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,10 +31,10 @@ import { RegistrationComponent } from './user/registration/registration.componen
 // tslint:disable-next-line: variable-name
 const facebook_oauth_client_id = 'Your-facebook-client-id.';
 const config = new AuthServiceConfig([
-  {
-    id: FacebookLoginProvider.PROVIDER_ID,
-    provider: new FacebookLoginProvider(facebook_oauth_client_id)
-  }
+   {
+      id: FacebookLoginProvider.PROVIDER_ID,
+      provider: new FacebookLoginProvider(facebook_oauth_client_id)
+   }
 ]);
 
 @NgModule({
@@ -48,8 +54,10 @@ const config = new AuthServiceConfig([
       ReactiveFormsModule,
       ToastrModule.forRoot(),
       SocialLoginModule.initialize(config),
+      WebcamModule,
       HttpClientModule,
-      AppRoutingModule
+      AppRoutingModule,
+      UppyModule,
    ],
    providers: [],
    bootstrap: [
