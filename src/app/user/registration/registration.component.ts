@@ -29,6 +29,12 @@ export class RegistrationComponent implements OnInit {
       fullName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       userName: ['', Validators.required],
+      cpf: ['', Validators.required],
+      dataDeNascimento: ['', Validators.required],
+      rg: ['', Validators.required],
+      telefoneResidencial: ['', Validators.required],
+      telefoneComercial: ['', Validators.required],
+      //celular: ['', Validators.required],
       passwords: this.fb.group({
         password: ['', [Validators.required, Validators.minLength(6)]],
         confirmPassword: ['', Validators.required]
@@ -41,8 +47,7 @@ export class RegistrationComponent implements OnInit {
     if (confirmSenhaCtrl.errors == null || 'mismatch' in confirmSenhaCtrl.errors) {
       if (fb.get('password').value !== confirmSenhaCtrl.value) {
         confirmSenhaCtrl.setErrors({ mismatch: true });
-      }
-      else {
+      } else {
         confirmSenhaCtrl.setErrors(null);
       }
     }
@@ -57,6 +62,7 @@ export class RegistrationComponent implements OnInit {
         () => {
           this.router.navigate(['/user/login']);
           this.toastr.success('Cadastro Realizado');
+          console.log(this.user);
         }, error => {
           const erro = error.error;
           erro.array.forEach(element => {

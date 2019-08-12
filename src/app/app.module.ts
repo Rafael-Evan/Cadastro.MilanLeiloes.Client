@@ -14,8 +14,7 @@ import { ToastrModule } from 'ngx-toastr';
 // Uppy Module
 import {UppyModule} from './uppy/uppy.module';
 
-// Webcam
-import { WebcamModule } from 'ngx-webcam';
+import {NgxMaskModule} from 'ngx-mask';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -53,8 +52,10 @@ const config = new AuthServiceConfig([
       FormsModule,
       ReactiveFormsModule,
       ToastrModule.forRoot(),
+      NgxMaskModule.forRoot({
+         showMaskTyped : true,
+       }),
       SocialLoginModule.initialize(config),
-      WebcamModule,
       HttpClientModule,
       AppRoutingModule,
       UppyModule,

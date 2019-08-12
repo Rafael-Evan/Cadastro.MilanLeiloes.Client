@@ -23,8 +23,8 @@
     <button [disabled]="!loginForm.valid" class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
     <br>
     <div id="fb-root"></div>
-    <button class="btn btn-lg btn-secondary btn-block " style=background-color:#385898 (click)="signIn('Facebook');"><i
-        class="fab fa-facebook-f"></i> Facebook</button>
+    <button class="btn btn-lg btn-secondary btn-block " style=background-color:#385898 (click)="signIn('Facebook');">
+      <i class="fab fa-facebook-square" style="font:arial"> Continue com o Facebook</i></button>
 
     <p class="mt-5 mb-3 text-muted">Não tem login? Cadastre-se abaixo</p>
     <button class="btn btn-lg btn-link btn-block" (click)="router.navigate(['/user/registration'])">Quero me

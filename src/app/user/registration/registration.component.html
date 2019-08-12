@@ -1,68 +1,275 @@
-<h1>Cadastro de Usuário</h1>
-<div class="col-md-5">
-  <form [formGroup]="registerForm">
-    <div class="form-group required">
-      <label for="">Nome Completo:</label>
-      <input type="text" class="form-control" formControlName="fullName" [ngClass]="{'is-invalid': registerForm.get('fullName').errors &&
-                                  registerForm.get('fullName').touched }" placeholder="Insira o Nome Completo" />
-      <div *ngIf="registerForm.get('fullName').hasError('required') &&
-                    registerForm.get('fullName').touched" class="invalid-feedback">
-        Nome Completo é obrigatório.
+<br>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-2">
+      <h1>Cadastro</h1>
+      <div class="list-group">
+        <a class="list-group-item active">Informações Pessoais</a>
+        <a class="list-group-item">Category 2</a>
+        <a class="list-group-item">Category 3</a>
       </div>
     </div>
-    <div class="form-group">
-      <label for="">Email:</label>
-      <input class="form-control" type="text" formControlName="email" [ngClass]="{ 'is-invalid': registerForm.get('email').errors && 
-                                     registerForm.get('email').touched}" placeholder="Insira o Nome Completo" />
-      <div *ngIf="registerForm.get('email').hasError('required') &&
-                    registerForm.get('email').touched" class="invalid-feedback">
-        email é obrigatório.
+    <div class="col-sm-0">
+      <div class="well navbar-light">
+        <h4>Informações Pessoais</h4>
+        <form [formGroup]="registerForm">
+          <div class="form-row col-md-12">
+            <div class="form-group required col-12">
+              <label for="">Nome Completo:</label>
+              <input type="text" class="form-control" formControlName="fullName" [ngClass]="{'is-invalid': registerForm.get('fullName').errors &&
+                                                    registerForm.get('fullName').touched }"
+                placeholder="Insira o Nome Completo" />
+              <div *ngIf="registerForm.get('fullName').hasError('required') &&
+                                      registerForm.get('fullName').touched" class="invalid-feedback">
+                Nome Completo é obrigatório.
+              </div>
+            </div>
+          </div>
+          <div class="form-row col-md-12">
+            <div class="form-group col-md-6 mb-2">
+              <label for="validationCustom03">CPF</label>
+              <input mask="000.000.000-00" type="text" class="form-control" formControlName="cpf" [ngClass]="{'is-invalid': registerForm.get('cpf').errors &&
+                registerForm.get('cpf').touched }" placeholder="CPF" />
+              <div *ngIf="registerForm.get('cpf').hasError('required') &&
+  registerForm.get('cpf').touched" class="invalid-feedback">
+                CPF é obrigatório.
+              </div>
+            </div>
+            <div class="form-group col-md-6 mb-2">
+              <label for="validationCustom03">RG</label>
+              <input mask="00.000.000-0" type="text" class="form-control" formControlName="rg" [ngClass]="{'is-invalid': registerForm.get('rg').errors &&
+                  registerForm.get('rg').touched }" placeholder="RG" />
+              <div *ngIf="registerForm.get('rg').hasError('required') &&
+    registerForm.get('rg').touched" class="invalid-feedback">
+                RG é obrigatório.
+              </div>
+            </div>
+          </div>
+          <div class="form-row col-md-12">
+            <div class="form-group col-md-7 mb-2">
+              <label for="">Email:</label>
+              <input class="form-control" type="text" formControlName="email" [ngClass]="{ 'is-invalid': registerForm.get('email').errors && 
+                                                       registerForm.get('email').touched}"
+                placeholder="Insira o E-mail" />
+              <div *ngIf="registerForm.get('email').hasError('required') &&
+                                      registerForm.get('email').touched" class="invalid-feedback">
+                email é obrigatório.
+              </div>
+            </div>
+            <div class="form-group col-5 mb-3">
+              <label for="">Usuario:</label>
+              <input class="form-control" type="text" formControlName="userName" [ngClass]="{'is-invalid': registerForm.get('userName').errors &&
+                                                      registerForm.get('userName').touched}" placeholder="Usuário" />
+              <div *ngIf="registerForm.get('userName').hasError('required') &&
+                                      registerForm.get('userName').touched" class="invalid-feedback">
+                Usuário é obrigatório.
+              </div>
+            </div>
+          </div>
+          <div class="form-row col-md-12" formGroupName="passwords">
+            <div class="form-group col-6 mb-3">
+              <label for="">Senha:</label>
+              <input class="form-control" type="password" formControlName="password" [ngClass]="{ 'is-invalid': registerForm.get('passwords.password').errors &&
+                                           registerForm.get('passwords.password').touched}"
+                placeholder="Digite uma Senha" />
+              <div *ngIf="registerForm.get('passwords.password').hasError('minlength') &&
+                registerForm.get('passwords.password').touched" class="invalid-feedback">
+                Deve conter no mínimo 6 caracters
+              </div>
+              <div *ngIf="registerForm.get('passwords.password').hasError('required') &&
+                          registerForm.get('passwords.password').touched" class="invalid-feedback">
+                Senha é obrigatório.
+              </div>
+            </div>
+            <div class="form-group col-6 mb-3">
+              <label for="">Confirmar Senha:</label>
+              <input class="form-control" type="password" formControlName="confirmPassword" [ngClass]="{ 'is-invalid': registerForm.get('passwords.confirmPassword').errors 
+                             && registerForm.get('passwords.confirmPassword').touched 
+                             ||registerForm.get('passwords.confirmPassword').hasError('mismatch') 
+                             && registerForm.get('passwords.confirmPassword').touched }"
+                placeholder="Confirme a Senha" />
+              <div *ngIf="registerForm.get('passwords.confirmPassword').hasError('required') &&
+                          registerForm.get('passwords.confirmPassword').touched" class="invalid-feedback">
+                Confirme a Senha
+              </div>
+              <div *ngIf="registerForm.get('passwords.confirmPassword').hasError('mismatch') 
+                          && registerForm.get('passwords.confirmPassword').touched" class="invalid-feedback">
+                Confirmação não confere
+              </div>
+            </div>
+          </div>
+          <div class="form-row col-md-12">
+            <div class="form-group col-md-6 mb-2">
+              <label for="validationCustom03">Data de Nascimento</label>
+              <input type="date" class="form-control" formControlName="dataDeNascimento" [ngClass]="{'is-invalid': registerForm.get('dataDeNascimento').errors &&
+                  registerForm.get('dataDeNascimento').touched }" placeholder="Data de Nascimento" />
+              <div *ngIf="registerForm.get('dataDeNascimento').hasError('required') &&
+    registerForm.get('dataDeNascimento').touched" class="invalid-feedback">
+                Data de Nascimento é obrigatório.
+              </div>
+            </div>
+            <div class="form-group col-6 mb-2">
+              <label for="example-date-input">Estado Civil</label>
+              <div class="form-group">
+                <select class="form-control">
+                  <option value="">Escolha...</option>
+                  <option value="solteiro">Solteiro(a)</option>
+                  <option value="casado">Casado(a)</option>
+                  <option value="outros">Outros</option>
+                </select>
+              </div>
+              <div class="invalid-feedback">
+                Por favor, selecione um estado civil.
+              </div>
+            </div>
+          </div>
+          <div class="form-row col-md-12">
+            <label for="example-name-input">Sexo &nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <div class="form-group form-check-inline">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
+                  value="option1"> Masculino
+              </label>
+            </div>
+            <div class="form-group form-check-inline">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
+                  value="option2"> Feminino
+              </label>
+            </div>
+          </div>
+          <br>
+          <h4>Contato</h4>
+          <div class="form-row col-md-12">
+            <div class="form-group col-md-6 mb-2">
+              <label for="validationCustom03">Telefone Res.</label>
+              <input mask="(00) 0000-0000" type="text" class="form-control" formControlName="telefoneResidencial"
+                [ngClass]="{'is-invalid': registerForm.get('telefoneResidencial').errors &&
+                      registerForm.get('telefoneResidencial').touched }" placeholder="DDD + Tel Redisencial" />
+              <div *ngIf="registerForm.get('telefoneResidencial').hasError('required') &&
+        registerForm.get('telefoneResidencial').touched" class="invalid-feedback">
+                Por favor, digite um telefone residencial válido.
+              </div>
+            </div>
+           <div class="form-group col-md-6 mb-2">
+              <label for="validationCustom03">Telefone Com.</label>
+              <input mask="(00) 0000-0000" type="text" class="form-control" formControlName="telefoneComercial"
+                [ngClass]="{'is-invalid': registerForm.get('telefoneComercial').errors &&
+                        registerForm.get('telefoneComercial').touched }" placeholder="DDD + Tel Comercial" />
+              <div *ngIf="registerForm.get('telefoneComercial').hasError('required') &&
+          registerForm.get('telefoneComercial').touched" class="invalid-feedback">
+                Por favor, digite um telefone comercial válido.
+              </div>
+            </div>
+          </div>
+          <!-- <div class="form-row col-md-12">
+            <div class="form-group col-md-7 mb-2">
+              <label for="validationCustom03">Celular</label>
+              <input mask="(00) 00000-0000" type="text" class="form-control" formControlName="celular" [ngClass]="{'is-invalid': registerForm.get('celular').errors &&
+                          registerForm.get('celular').touched }" placeholder="DDD + Celular" />
+              <div *ngIf="registerForm.get('celular').hasError('required') &&
+            registerForm.get('celular').touched" class="invalid-feedback">
+                Por favor, digite um celular válido.
+              </div>
+            </div>
+          </div> -->
+          <br>
+          <h4>Endereço</h4>
+          <div class="form-row col-md-12">
+            <div class="form-group col-md-9 mb-2">
+              <label for="validationCustom01">Endereço</label>
+              <input type="text" class="form-control" id="Endereco" placeholder="Endereço" required>
+              <div class="invalid-feedback">
+                Por favor, escolha um endereço.
+              </div>
+            </div>
+            <div class="col-md-3 mb-2">
+              <label for="form-group validationCustom01">Nº</label>
+              <input type="text" class="form-control" id="Numero" placeholder="Numero" required>
+              <div class="invalid-feedback">
+                Por favor, insira um numero.
+              </div>
+            </div>
+          </div>
+          <div class="form-row col-md-12">
+            <div class="form-group col-md-12 mb-2">
+              <label for="validationCustom01">Complemento</label>
+              <input type="text" class="form-control" id="Complemento" placeholder="Complemento" required>
+              <div class="invalid-feedback">
+                Por favor, escolha um Complemento.
+              </div>
+            </div>
+          </div>
+          <div class="form-row col-md-12">
+            <div class="form-group col-md-6 mb-2">
+              <label for="validationCustom01">Bairro</label>
+              <input type="text" class="form-control" id="Bairro" placeholder="Bairro" required>
+              <div class="invalid-feedback">
+                Por favor, escolha um Bairro.
+              </div>
+            </div>
+            <div class="form-group col-md-6 mb-2">
+              <label for="validationCustom01">Cidade</label>
+              <input type="text" class="form-control" id="Cidade" placeholder="Cidade" required>
+              <div class="invalid-feedback">
+                Por favor, insira um numero.
+              </div>
+            </div>
+          </div>
+          <div class="form-row col-md-12">
+            <div class="form-group col-md-6">
+              <div class="form-group">
+                <label for="validationCustomUsername">ESTADO</label>
+                <select class="form-control" id="Estado">
+                  <option value="">Escolha...</option>
+                  <option value="AC">Acre</option>
+                  <option value="AL">Alagoas</option>
+                  <option value="AP">Amapá</option>
+                  <option value="AM">Amazonas</option>
+                  <option value="BA">Bahia</option>
+                  <option value="CE">Ceará</option>
+                  <option value="DF">Distrito Federal</option>
+                  <option value="ES">Espírito Santo</option>
+                  <option value="GO">Goiás</option>
+                  <option value="MA">Maranhão</option>
+                  <option value="MT">Mato Grosso</option>
+                  <option value="MS">Mato Grosso do Sul</option>
+                  <option value="MG">Minas Gerais</option>
+                  <option value="PA">Pará</option>
+                  <option value="PB">Paraíba</option>
+                  <option value="PR">Paraná</option>
+                  <option value="PE">Pernambuco</option>
+                  <option value="PI">Piauí</option>
+                  <option value="RJ">Rio de Janeiro</option>
+                  <option value="RN">Rio Grande do Norte</option>
+                  <option value="RS">Rio Grande do Sul</option>
+                  <option value="RO">Rondônia</option>
+                  <option value="RR">Roraima</option>
+                  <option value="SC">Santa Catarina</option>
+                  <option value="SP">São Paulo</option>
+                  <option value="SE">Sergipe</option>
+                  <option value="TO">Tocantins</option>
+                </select>
+              </div>
+              <div class="invalid-feedback">
+                Por favor, selecione um estado.
+              </div>
+            </div>
+            <div class="form-group col-md-6 mb-2">
+              <label for="validationCustom01">CEP</label>
+              <input mask="00000-000" class="form-control" id="CEP" placeholder="CEP" required>
+              <div class="invalid-feedback">
+                Por favor, escolha um cep.
+              </div>
+            </div>
+          </div>
+          <div class="form-row col-md-12">
+            <div class="form-group col-md-5">
+              <button class="btn btn-lg btn-success btn-block" (click)="cadastrarUsuario()">Registar</button>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
-    <div class="form-group">
-      <label for="">Usuario:</label>
-      <input class="form-control" type="text" formControlName="userName" [ngClass]="{'is-invalid': registerForm.get('userName').errors &&
-                                    registerForm.get('userName').touched}" placeholder="Insira o nome de Usuário" />
-      <div *ngIf="registerForm.get('userName').hasError('required') &&
-                    registerForm.get('userName').touched" class="invalid-feedback">
-        Usuário é obrigatório.
-      </div>
-    </div>
-    <div formGroupName="passwords">
-      <div class="form-group">
-        <label for="">Senha:</label>
-        <input class="form-control" type="password" formControlName="password" [ngClass]="{ 'is-invalid': registerForm.get('passwords.password').errors &&
-                                       registerForm.get('passwords.password').touched}"
-          placeholder="Digite uma Senha" />
-        <div *ngIf="registerForm.get('passwords.password').hasError('minlength') &&
-            registerForm.get('passwords.password').touched" class="invalid-feedback">
-          Deve conter no mínimo 6 caracters
-        </div>
-        <div *ngIf="registerForm.get('passwords.password').hasError('required') &&
-                      registerForm.get('passwords.password').touched" class="invalid-feedback">
-          Senha é obrigatório.
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="">Confirmar Senha:</label>
-        <input class="form-control" type="password" formControlName="confirmPassword" [ngClass]="{ 'is-invalid': registerForm.get('passwords.confirmPassword').errors 
-                         && registerForm.get('passwords.confirmPassword').touched 
-                         ||registerForm.get('passwords.confirmPassword').hasError('mismatch') 
-                         && registerForm.get('passwords.confirmPassword').touched }" placeholder="Confirme a Senha" />
-        <div *ngIf="registerForm.get('passwords.confirmPassword').hasError('required') &&
-                      registerForm.get('passwords.confirmPassword').touched" class="invalid-feedback">
-          Confirme a Senha
-        </div>
-        <div *ngIf="registerForm.get('passwords.confirmPassword').hasError('mismatch') 
-                      && registerForm.get('passwords.confirmPassword').touched" class="invalid-feedback">
-          Confirmação não confere
-        </div>
-      </div>
-    </div>
-    <div class="form-row">
-      <div class="form-group col-md-8 offset-md-2">
-        <button class="btn btn-lg btn-success btn-block" (click)="cadastrarUsuario()">Registar</button>
-      </div>
-    </div>
-  </form>
+  </div>
 </div>
