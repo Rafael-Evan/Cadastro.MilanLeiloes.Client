@@ -8,7 +8,14 @@ export class User {
     sexo: string;
     estadoCivil: string;
     rg: string;
+    telefoneCelular: string;
     telefoneResidencial: string;
     telefoneComercial: string;
-    // celular: string;
+    endereco: string;
+    numero: string;
+    // complemento: string;
+    bairro: string;
+    cidade: string;
+    estado: string;
+    cep: string;
 }

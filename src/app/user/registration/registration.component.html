@@ -151,114 +151,99 @@
                 Por favor, digite um telefone residencial válido.
               </div>
             </div>
-           <div class="form-group col-md-6 mb-2">
+            <div class="form-group col-md-6 mb-2">
+              <label for="validationCustom03">Celular</label>
+              <input mask="(00) 00000-0000" type="text" class="form-control" formControlName="telefoneCelular"
+                [ngClass]="{'is-invalid': registerForm.get('telefoneCelular').errors &&
+                        registerForm.get('telefoneCelular').touched }" placeholder="DDD + Celular" />
+              <div *ngIf="registerForm.get('telefoneCelular').hasError('required') &&
+          registerForm.get('telefoneCelular').touched" class="invalid-feedback">
+                Por favor, digite um celular válido.
+              </div>
+            </div>
+          </div>
+          <div class="form-row col-md-12">
+            <div class="form-group col-md-6 mb-2">
               <label for="validationCustom03">Telefone Com.</label>
               <input mask="(00) 0000-0000" type="text" class="form-control" formControlName="telefoneComercial"
                 [ngClass]="{'is-invalid': registerForm.get('telefoneComercial').errors &&
-                        registerForm.get('telefoneComercial').touched }" placeholder="DDD + Tel Comercial" />
+                      registerForm.get('telefoneComercial').touched }" placeholder="DDD + Tel Comercial" />
               <div *ngIf="registerForm.get('telefoneComercial').hasError('required') &&
-          registerForm.get('telefoneComercial').touched" class="invalid-feedback">
+        registerForm.get('telefoneComercial').touched" class="invalid-feedback">
                 Por favor, digite um telefone comercial válido.
               </div>
             </div>
           </div>
-          <!-- <div class="form-row col-md-12">
-            <div class="form-group col-md-7 mb-2">
-              <label for="validationCustom03">Celular</label>
-              <input mask="(00) 00000-0000" type="text" class="form-control" formControlName="celular" [ngClass]="{'is-invalid': registerForm.get('celular').errors &&
-                          registerForm.get('celular').touched }" placeholder="DDD + Celular" />
-              <div *ngIf="registerForm.get('celular').hasError('required') &&
-            registerForm.get('celular').touched" class="invalid-feedback">
-                Por favor, digite um celular válido.
-              </div>
-            </div>
-          </div> -->
           <br>
           <h4>Endereço</h4>
           <div class="form-row col-md-12">
-            <div class="form-group col-md-9 mb-2">
-              <label for="validationCustom01">Endereço</label>
-              <input type="text" class="form-control" id="Endereco" placeholder="Endereço" required>
-              <div class="invalid-feedback">
-                Por favor, escolha um endereço.
+            <div class="form-group col-md-8 mb-2">
+              <label for="validationCustom03">Endereço</label>
+              <input type="text" class="form-control" formControlName="endereco" [ngClass]="{'is-invalid': registerForm.get('endereco').errors &&
+                      registerForm.get('endereco').touched }" placeholder="Endereço" />
+              <div *ngIf="registerForm.get('endereco').hasError('required') &&
+        registerForm.get('endereco').touched" class="invalid-feedback">
+                Por favor, digite um endereço válido.
               </div>
             </div>
-            <div class="col-md-3 mb-2">
-              <label for="form-group validationCustom01">Nº</label>
-              <input type="text" class="form-control" id="Numero" placeholder="Numero" required>
-              <div class="invalid-feedback">
-                Por favor, insira um numero.
+            <div class="form-group col-4 mb-2">
+              <label for="">Nº</label>
+              <input class="form-control" type="text" formControlName="numero" [ngClass]="{'is-invalid': registerForm.get('numero').errors &&
+              registerForm.get('numero').touched}" placeholder="Numero" />
+              <div *ngIf="registerForm.get('numero').hasError('required') &&
+                                      registerForm.get('numero').touched" class="invalid-feedback">
+                Numero é obrigatório.
               </div>
             </div>
           </div>
           <div class="form-row col-md-12">
             <div class="form-group col-md-12 mb-2">
-              <label for="validationCustom01">Complemento</label>
-              <input type="text" class="form-control" id="Complemento" placeholder="Complemento" required>
-              <div class="invalid-feedback">
-                Por favor, escolha um Complemento.
+              <label for="validationCustom03">Complemento</label>
+              <input class="form-control" type="text" formControlName="complemento" [ngClass]="{'is-invalid': registerForm.get('complemento').errors &&
+              registerForm.get('complemento').touched}" placeholder="Complemento" />
+              <div *ngIf="registerForm.get('complemento').hasError('required') &&
+                                      registerForm.get('complemento').touched" class="invalid-feedback">
+                complemento é obrigatório.
               </div>
             </div>
           </div>
           <div class="form-row col-md-12">
             <div class="form-group col-md-6 mb-2">
-              <label for="validationCustom01">Bairro</label>
-              <input type="text" class="form-control" id="Bairro" placeholder="Bairro" required>
-              <div class="invalid-feedback">
-                Por favor, escolha um Bairro.
+              <label for="validationCustom03">Bairro</label>
+              <input type="text" class="form-control" formControlName="bairro" [ngClass]="{'is-invalid': registerForm.get('bairro').errors &&
+                      registerForm.get('bairro').touched }" placeholder="Bairro" />
+              <div *ngIf="registerForm.get('bairro').hasError('required') &&
+        registerForm.get('bairro').touched" class="invalid-feedback">
+                Por favor, digite um bairro.
               </div>
             </div>
             <div class="form-group col-md-6 mb-2">
-              <label for="validationCustom01">Cidade</label>
-              <input type="text" class="form-control" id="Cidade" placeholder="Cidade" required>
-              <div class="invalid-feedback">
-                Por favor, insira um numero.
+              <label for="validationCustom03">Cidade</label>
+              <input type="text" class="form-control" formControlName="cidade" [ngClass]="{'is-invalid': registerForm.get('cidade').errors &&
+                        registerForm.get('cidade').touched }" placeholder="Cidade" />
+              <div *ngIf="registerForm.get('cidade').hasError('required') &&
+          registerForm.get('cidade').touched" class="invalid-feedback">
+                Por favor, digite uma cidade.
               </div>
             </div>
           </div>
           <div class="form-row col-md-12">
             <div class="form-group col-md-6">
               <div class="form-group">
-                <label for="validationCustomUsername">ESTADO</label>
-                <select class="form-control" id="Estado">
-                  <option value="">Escolha...</option>
-                  <option value="AC">Acre</option>
-                  <option value="AL">Alagoas</option>
-                  <option value="AP">Amapá</option>
-                  <option value="AM">Amazonas</option>
-                  <option value="BA">Bahia</option>
-                  <option value="CE">Ceará</option>
-                  <option value="DF">Distrito Federal</option>
-                  <option value="ES">Espírito Santo</option>
-                  <option value="GO">Goiás</option>
-                  <option value="MA">Maranhão</option>
-                  <option value="MT">Mato Grosso</option>
-                  <option value="MS">Mato Grosso do Sul</option>
-                  <option value="MG">Minas Gerais</option>
-                  <option value="PA">Pará</option>
-                  <option value="PB">Paraíba</option>
-                  <option value="PR">Paraná</option>
-                  <option value="PE">Pernambuco</option>
-                  <option value="PI">Piauí</option>
-                  <option value="RJ">Rio de Janeiro</option>
-                  <option value="RN">Rio Grande do Norte</option>
-                  <option value="RS">Rio Grande do Sul</option>
-                  <option value="RO">Rondônia</option>
-                  <option value="RR">Roraima</option>
-                  <option value="SC">Santa Catarina</option>
-                  <option value="SP">São Paulo</option>
-                  <option value="SE">Sergipe</option>
-                  <option value="TO">Tocantins</option>
+                <label for="validationCustomUsername">Estado</label >
+                <select class="form-control" id="Estado" formControlName="estado" placeholder="estado">
+                  <option *ngFor="let state of states" [ngValue]="state">
+                    {{ state.abbrev }}
+                  </option>
                 </select>
-              </div>
-              <div class="invalid-feedback">
-                Por favor, selecione um estado.
               </div>
             </div>
             <div class="form-group col-md-6 mb-2">
-              <label for="validationCustom01">CEP</label>
-              <input mask="00000-000" class="form-control" id="CEP" placeholder="CEP" required>
-              <div class="invalid-feedback">
+              <label for="validationCustom03">CEP</label>
+              <input mask="00000-000" type="text" class="form-control" formControlName="cep" [ngClass]="{'is-invalid': registerForm.get('numero').errors &&
+                        registerForm.get('cep').touched }" placeholder="CEP" />
+              <div *ngIf="registerForm.get('cep').hasError('required') &&
+          registerForm.get('cep').touched" class="invalid-feedback">
                 Por favor, escolha um cep.
               </div>
             </div>
