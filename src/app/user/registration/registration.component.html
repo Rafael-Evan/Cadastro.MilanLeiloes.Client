@@ -48,7 +48,7 @@
           <div class="form-row col-md-12">
             <div class="form-group col-md-7 mb-2">
               <label for="">Email:</label>
-              <input class="form-control" type="text" formControlName="email" [ngClass]="{ 'is-invalid': registerForm.get('email').errors && 
+              <input class="form-control"  type="text" formControlName="email" [ngClass]="{ 'is-invalid': registerForm.get('email').errors && 
                                                        registerForm.get('email').touched}"
                 placeholder="Insira o E-mail" />
               <div *ngIf="registerForm.get('email').hasError('required') &&
@@ -108,34 +108,27 @@
                 Data de Nascimento é obrigatório.
               </div>
             </div>
-            <div class="form-group col-6 mb-2">
+            <div class="form-group col-md-6">
               <label for="example-date-input">Estado Civil</label>
-              <div class="form-group">
-                <select class="form-control">
-                  <option value="">Escolha...</option>
-                  <option value="solteiro">Solteiro(a)</option>
-                  <option value="casado">Casado(a)</option>
-                  <option value="outros">Outros</option>
-                </select>
-              </div>
-              <div class="invalid-feedback">
-                Por favor, selecione um estado civil.
+              <select class="form-control" formControlName="estadoCivil" placeholder="estadoCivil">
+                <option *ngFor="let c of civil" [ngValue]="c.name">
+                  {{ c.name }}
+                </option>
+              </select>
+              <div *ngIf="registerForm.get('estadoCivil').hasError('required') &&
+            registerForm.get('estadoCivil').touched" class="invalid-feedback">
+                Por favor, escolha um estado civil.
               </div>
             </div>
           </div>
           <div class="form-row col-md-12">
-            <label for="example-name-input">Sexo &nbsp;&nbsp;&nbsp;&nbsp;</label>
-            <div class="form-group form-check-inline">
-              <label class="form-check-label">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
-                  value="option1"> Masculino
-              </label>
-            </div>
-            <div class="form-group form-check-inline">
-              <label class="form-check-label">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
-                  value="option2"> Feminino
-              </label>
+            <label for="sexo" class="control-label">&nbsp;&nbsp;Sexo&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <div id="sexo" class="row">
+              <div class="custom-radio custom-control-inline" *ngFor="let item of sexoOp">
+                <label class="radio-inline" for="customRadioInline1">
+                    <input type="radio" [value]="item.name" formControlName="sexo">{{item.name}}
+                </label>
+              </div>
             </div>
           </div>
           <br>
@@ -200,11 +193,7 @@
             <div class="form-group col-md-12 mb-2">
               <label for="validationCustom03">Complemento</label>
               <input class="form-control" type="text" formControlName="complemento" [ngClass]="{'is-invalid': registerForm.get('complemento').errors &&
-              registerForm.get('complemento').touched}" placeholder="Complemento" />
-              <div *ngIf="registerForm.get('complemento').hasError('required') &&
-                                      registerForm.get('complemento').touched" class="invalid-feedback">
-                complemento é obrigatório.
-              </div>
+              registerForm.get('complemento').touched}" placeholder="complemento" />
             </div>
           </div>
           <div class="form-row col-md-12">
@@ -229,18 +218,20 @@
           </div>
           <div class="form-row col-md-12">
             <div class="form-group col-md-6">
-              <div class="form-group">
-                <label for="validationCustomUsername">Estado</label >
-                <select class="form-control" id="Estado" formControlName="estado" placeholder="estado">
-                  <option *ngFor="let state of states" [ngValue]="state">
-                    {{ state.abbrev }}
-                  </option>
-                </select>
+              <label for="validationCustomUsername">Estado</label>
+              <select class="form-control" id="Estado" formControlName="estado" placeholder="estado">
+                <option *ngFor="let state of states" [ngValue]="state.abbrev">
+                  {{ state.abbrev }}
+                </option>
+              </select>
+              <div *ngIf="registerForm.get('estado').hasError('required') &&
+          registerForm.get('estado').touched" class="invalid-feedback">
+                Por favor, escolha um estado.
               </div>
             </div>
             <div class="form-group col-md-6 mb-2">
               <label for="validationCustom03">CEP</label>
-              <input mask="00000-000" type="text" class="form-control" formControlName="cep" [ngClass]="{'is-invalid': registerForm.get('numero').errors &&
+              <input mask="00000-000" type="text" class="form-control" formControlName="cep" [ngClass]="{'is-invalid': registerForm.get('cep').errors &&
                         registerForm.get('cep').touched }" placeholder="CEP" />
               <div *ngIf="registerForm.get('cep').hasError('required') &&
           registerForm.get('cep').touched" class="invalid-feedback">

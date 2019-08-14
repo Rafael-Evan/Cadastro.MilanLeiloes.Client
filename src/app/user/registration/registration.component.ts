@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/_models/User';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MilanAuthService } from 'src/app/_services/milan-auth.service';
 
 @Component({
@@ -12,44 +12,61 @@ import { MilanAuthService } from 'src/app/_services/milan-auth.service';
 })
 export class RegistrationComponent implements OnInit {
 
+  SocialUser: any;
   registerForm: FormGroup;
   user: User;
+  sexoOp: any[];
+
+  civil = [
+    { name: 'Solteiro(a)' },
+    { name: 'Casado(a)' },
+    { name: 'Outros' },
+  ];
 
   states = [
-    {name: 'Acre', abbrev: 'AC'},
-    {name: 'Alagoas', abbrev: 'AL'},
-    {name: 'Amapá', abbrev: 'AP'},
-    {name: 'Amazonas', abbrev: 'AM'},
-    {name: 'Bahia', abbrev: 'BA'},
-    {name: 'Ceará', abbrev: 'CE'},
-    {name: 'Distrito Federal', abbrev: 'DF'},
-    {name: 'Espírito Santo', abbrev: 'ES'},
-    {name: 'Goiás', abbrev: 'GO'},
-    {name: 'Maranhão', abbrev: 'MA'},
-    {name: 'Mato Grosso', abbrev: 'MT'},
-    {name: 'Mato Grosso do Sul', abbrev: 'MS'},
-    {name: 'Minas Gerais', abbrev: 'MG'},
-    {name: 'Pará', abbrev: 'PA'},
-    {name: 'Paraíba', abbrev: 'PB'},
-    {name: 'Pernambuco', abbrev: 'PE'},
-    {name: 'Piauí', abbrev: 'PI'},
-    {name: 'Rio de Janeiro', abbrev: 'RJ'},
-    {name: 'Rio Grande do Norte', abbrev: 'RN'},
-    {name: 'Rio Grande do Sul', abbrev: 'RS'},
-    {name: 'Rondônia', abbrev: 'RO'},
-    {name: 'Santa Catarina', abbrev: 'SC'},
-    {name: 'São Paulo', abbrev: 'SP'},
-    {name: 'Sergipe', abbrev: 'SE'},
-    {name: 'Tocantins', abbrev: 'TO'},
+    { name: 'Acre', abbrev: 'AC' },
+    { name: 'Alagoas', abbrev: 'AL' },
+    { name: 'Amapá', abbrev: 'AP' },
+    { name: 'Amazonas', abbrev: 'AM' },
+    { name: 'Bahia', abbrev: 'BA' },
+    { name: 'Ceará', abbrev: 'CE' },
+    { name: 'Distrito Federal', abbrev: 'DF' },
+    { name: 'Espírito Santo', abbrev: 'ES' },
+    { name: 'Goiás', abbrev: 'GO' },
+    { name: 'Maranhão', abbrev: 'MA' },
+    { name: 'Mato Grosso', abbrev: 'MT' },
+    { name: 'Mato Grosso do Sul', abbrev: 'MS' },
+    { name: 'Minas Gerais', abbrev: 'MG' },
+    { name: 'Pará', abbrev: 'PA' },
+    { name: 'Paraíba', abbrev: 'PB' },
+    { name: 'Pernambuco', abbrev: 'PE' },
+    { name: 'Piauí', abbrev: 'PI' },
+    { name: 'Rio de Janeiro', abbrev: 'RJ' },
+    { name: 'Rio Grande do Norte', abbrev: 'RN' },
+    { name: 'Rio Grande do Sul', abbrev: 'RS' },
+    { name: 'Rondônia', abbrev: 'RO' },
+    { name: 'Santa Catarina', abbrev: 'SC' },
+    { name: 'São Paulo', abbrev: 'SP' },
+    { name: 'Sergipe', abbrev: 'SE' },
+    { name: 'Tocantins', abbrev: 'TO' },
   ];
 
   constructor(private authService: MilanAuthService
-    ,         public router: Router
-    ,         public fb: FormBuilder
-    ,         private toastr: ToastrService) { }
+    , public router: Router
+    , public fb: FormBuilder
+    , private toastr: ToastrService
+  ) { }
 
   ngOnInit() {
     this.validation();
+    this.sexoOp = this.getSexo();
+  }
+
+  getSexo() {
+    return [
+      { name: 'Masculino', abbrev: 'M' },
+      { name: 'Feminimo', abbrev: 'F' },
+    ];
   }
 
   validation() {
@@ -59,16 +76,18 @@ export class RegistrationComponent implements OnInit {
       userName: ['', Validators.required],
       cpf: ['', Validators.required],
       dataDeNascimento: ['', Validators.required],
+      sexo: [''],
+      estadoCivil: ['', Validators.required],
       rg: ['', Validators.required],
       telefoneCelular: ['', Validators.required],
       telefoneResidencial: ['', Validators.required],
       telefoneComercial: ['', Validators.required],
       endereco: ['', Validators.required],
       numero: ['', Validators.required],
+      complemento: [''],
       bairro: ['', Validators.required],
       cidade: ['', Validators.required],
       estado: ['', Validators.required],
-      complemento: ['', Validators.required],
       cep: ['', Validators.required],
       passwords: this.fb.group({
         password: ['', [Validators.required, Validators.minLength(6)]],
@@ -95,8 +114,7 @@ export class RegistrationComponent implements OnInit {
         this.registerForm.value);
       this.authService.register(this.user).subscribe(
         () => {
-          this.router.navigate(['/user/login']);
-          this.toastr.success('Cadastro Realizado');
+          this.router.navigate(['/Documentos']);
         }, error => {
           const erro = error.error;
           erro.array.forEach(element => {
