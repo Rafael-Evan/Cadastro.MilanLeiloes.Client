@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { User } from 'src/app/_models/User';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MilanAuthService } from 'src/app/_services/milan-auth.service';
+import { SocialUser } from 'angularx-social-login';
 
 @Component({
   selector: 'app-registration',
@@ -14,8 +14,8 @@ export class RegistrationComponent implements OnInit {
 
   SocialUser: any;
   registerForm: FormGroup;
-  user: User;
   sexoOp: any[];
+
 
   civil = [
     { name: 'Solteiro(a)' },
@@ -55,9 +55,11 @@ export class RegistrationComponent implements OnInit {
     , public router: Router
     , public fb: FormBuilder
     , private toastr: ToastrService
+    , private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
+
     this.validation();
     this.sexoOp = this.getSexo();
   }

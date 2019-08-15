@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { MilanAuthService } from 'src/app/_services/milan-auth.service';
@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   user: SocialUser;
   title = 'Angular Socio login via Facebook!';
   model: any = {};
+  email: any;
 
   constructor(private _socioAuthServ: AuthService
     , private authService: MilanAuthService
@@ -30,21 +31,29 @@ export class LoginComponent implements OnInit {
       (response) => {
         console.log(platform + 'logged in user data is= ', response);
         this.user = response;
-        this.router.navigate(['/user/registration'],
-          { queryParams: { 'social': this.user } }
-        );
+        this.email = this.user.email;
 
+        this.authService.socialLogin(this.email)
+          .subscribe(
+            () => {
+              this.router.navigate(['/home']);
+            },
+            error => {
+              this.router.navigate(['/user/registration']);
+            }
+          );
       }
     );
   }
 
   ngOnInit() {
+
     if (localStorage.getItem('token') !== null) {
       this.router.navigate(['/home']);
     }
 
     // tslint:disable-next-line: only-arrow-functions
-    (window as any).fbAsyncInit = function () {
+    (window as any).fbAsyncInit = function() {
       FB.init({
         appId: '383913478995156',
         cookie: true,
@@ -71,9 +80,18 @@ export class LoginComponent implements OnInit {
         (response) => {
           console.log(response);
           this.user = response;
-          this.router.navigate(['/user/registration'],
-            { queryParams: { 'social': this.user } }
-          );
+          this.email = this.user.email;
+          this.authService.socialLogin(this.email)
+            .subscribe(
+              () => {
+                this.router.navigate(['/home']);
+              },
+              error => {
+                this.router.navigate(['/user/registration'],
+                  { queryParams: { 'Social': this.user } }
+                );
+              }
+            );
         }
       );
   }

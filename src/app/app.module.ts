@@ -1,10 +1,11 @@
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 // Importing social login module and facebook login provider.
 import { SocialLoginModule, AuthServiceConfig, FacebookLoginProvider,  GoogleLoginProvider } from 'angularx-social-login';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
