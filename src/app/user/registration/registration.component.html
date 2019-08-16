@@ -1,19 +1,25 @@
 <br>
 <div class="container-fluid">
   <div class="row">
-    <div class="col-lg-2">
-      <h1>Cadastro</h1>
-      <div class="list-group">
-        <a class="list-group-item active">Informações Pessoais</a>
-        <a class="list-group-item">Category 2</a>
-        <a class="list-group-item">Category 3</a>
-      </div>
-    </div>
+      <div class="col-lg-2">
+          <h1>Cadastro</h1>
+          <div class="list-group">
+            <a class="list-group-item active">Informações Pessoais</a>
+            <a class="list-group-item">Category 2</a>
+            <a class="list-group-item">Category 3</a>
+          </div>
+        </div>
     <div class="col-sm-0">
-      <div class="well navbar-light">
+      <div class="well navbar-light" >
         <h4>Informações Pessoais</h4>
         <form [formGroup]="registerForm">
           <div class="form-row col-md-12">
+            <!-- <div class="form-group required col-12" *ngIf="socialUser">
+              <label for="">Nome Completo:</label>
+              <input value="{{socialUser.name}}" type="readonly" class="form-control" formControlName="fullName" [ngClass]="{'is-invalid': registerForm.get('fullName').errors &&
+                                                    registerForm.get('fullName').touched }"
+                placeholder="Insira o Nome Completo" />
+            </div> -->
             <div class="form-group required col-12">
               <label for="">Nome Completo:</label>
               <input type="text" class="form-control" formControlName="fullName" [ngClass]="{'is-invalid': registerForm.get('fullName').errors &&
@@ -46,16 +52,20 @@
             </div>
           </div>
           <div class="form-row col-md-12">
-            <div class="form-group col-md-7 mb-2">
+            <!-- <div class="form-group col-md-7 mb-2" *ngIf="socialUser">
               <label for="">Email:</label>
-              <input class="form-control"  type="text" formControlName="email" [ngClass]="{ 'is-invalid': registerForm.get('email').errors && 
-                                                       registerForm.get('email').touched}"
-                placeholder="Insira o E-mail" />
-              <div *ngIf="registerForm.get('email').hasError('required') &&
-                                      registerForm.get('email').touched" class="invalid-feedback">
-                email é obrigatório.
+              <input value="{{socialUser.email}}" class="form-control" type="readonly" formControlName="email" placeholder="Insira o E-mail" />
+            </div> -->
+            <div class="form-group col-md-7 mb-2">
+                <label for="">Email:</label>
+                <input class="form-control" type="text" formControlName="email" [ngClass]="{ 'is-invalid': registerForm.get('email').errors && 
+                                                         registerForm.get('email').touched}"
+                  placeholder="Insira o E-mail" />
+                <div *ngIf="registerForm.get('email').hasError('required') &&
+                                        registerForm.get('email').touched" class="invalid-feedback">
+                  email é obrigatório.
+                </div>
               </div>
-            </div>
             <div class="form-group col-5 mb-3">
               <label for="">Usuario:</label>
               <input class="form-control" type="text" formControlName="userName" [ngClass]="{'is-invalid': registerForm.get('userName').errors &&

@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
     platform = FacebookLoginProvider.PROVIDER_ID;
     this._socioAuthServ.signIn(platform).then(
       (response) => {
-        console.log(platform + 'logged in user data is= ', response);
+        console.log(response);
         this.user = response;
         this.email = this.user.email;
 

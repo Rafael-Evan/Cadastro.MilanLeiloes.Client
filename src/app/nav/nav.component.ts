@@ -13,7 +13,7 @@ export class NavComponent implements OnInit {
   title = 'Angular Socio login via Facebook!';
   user: any;
 
-  constructor(private authService: MilanAuthService
+  constructor(public authService: MilanAuthService
     ,         public router: Router
     ,         private toastr: ToastrService) { }
 

@@ -4,7 +4,7 @@ import { map, tap, takeUntil, filter } from 'rxjs/operators';
 import { debounceTime } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 import { contains } from 'ramda';
-import { UppyService } from '../uppy/uppy.service';
+import { UppyService } from 'src/app/uppy/uppy.service';
 
 
 @Component({

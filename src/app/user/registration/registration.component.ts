@@ -3,8 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 import { ToastrService } from 'ngx-toastr';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MilanAuthService } from 'src/app/_services/milan-auth.service';
-import { SocialUser } from 'angularx-social-login';
-
+import { AuthService, GoogleLoginProvider, SocialUser } from 'angularx-social-login';
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
@@ -12,7 +11,7 @@ import { SocialUser } from 'angularx-social-login';
 })
 export class RegistrationComponent implements OnInit {
 
-  SocialUser: any;
+  user: any;
   registerForm: FormGroup;
   sexoOp: any[];
 
@@ -52,6 +51,7 @@ export class RegistrationComponent implements OnInit {
   ];
 
   constructor(private authService: MilanAuthService
+    , private _socioAuthServ: AuthService
     , public router: Router
     , public fb: FormBuilder
     , private toastr: ToastrService
@@ -59,7 +59,6 @@ export class RegistrationComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
     this.validation();
     this.sexoOp = this.getSexo();
   }
@@ -73,8 +72,8 @@ export class RegistrationComponent implements OnInit {
 
   validation() {
     this.registerForm = this.fb.group({
-      fullName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
+      fullName: [this._socioAuthServ._user == null ? '' : this._socioAuthServ._user.name, Validators.required],
+      email: [this._socioAuthServ._user == null ? '' : this._socioAuthServ._user.email, [Validators.required, Validators.email]],
       userName: ['', Validators.required],
       cpf: ['', Validators.required],
       dataDeNascimento: ['', Validators.required],
