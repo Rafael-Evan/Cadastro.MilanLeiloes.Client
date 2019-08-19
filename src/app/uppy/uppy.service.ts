@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+// import { Uppy } from '@uppy/core';
 import * as Uppy from 'uppy';
 import { set, lensProp, compose, reduce, __ } from 'ramda';
 
@@ -19,12 +20,12 @@ export class UppyService/* extends Uppy*/ {
 
     const addPlugin = (uppy: any, [name, conf]: [string, any]) => uppy.use(name, conf);
 
-    // const uppyInstance = compose(
-    //   (u: Uppy) => u.run(),
-    //   reduce(addPlugin, __, plugins),
-    //   Uppy.Core
-    // )({ autoProceed: false });
+    const uppyInstance = compose(
+      (u: any) => u.run(),
+      reduce(addPlugin, __, plugins),
+      Uppy.Core
+    )({ autoProceed: false });
 
-    // return uppyInstance;
+    return uppyInstance;
   }
 }

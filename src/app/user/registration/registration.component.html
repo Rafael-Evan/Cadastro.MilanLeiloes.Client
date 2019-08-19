@@ -156,11 +156,11 @@
             </div>
             <div class="form-group col-md-6 mb-2">
               <label for="validationCustom03">Celular</label>
-              <input mask="(00) 00000-0000" type="text" class="form-control" formControlName="telefoneCelular"
-                [ngClass]="{'is-invalid': registerForm.get('telefoneCelular').errors &&
-                        registerForm.get('telefoneCelular').touched }" placeholder="DDD + Celular" />
-              <div *ngIf="registerForm.get('telefoneCelular').hasError('required') &&
-          registerForm.get('telefoneCelular').touched" class="invalid-feedback">
+              <input mask="(00) 00000-0000" type="text" class="form-control" formControlName="celular"
+                [ngClass]="{'is-invalid': registerForm.get('celular').errors &&
+                        registerForm.get('celular').touched }" placeholder="DDD + Celular" />
+              <div *ngIf="registerForm.get('celular').hasError('required') &&
+          registerForm.get('celular').touched" class="invalid-feedback">
                 Por favor, digite um celular válido.
               </div>
             </div>
@@ -182,10 +182,10 @@
           <div class="form-row col-md-12">
             <div class="form-group col-md-8 mb-2">
               <label for="validationCustom03">Endereço</label>
-              <input type="text" class="form-control" formControlName="endereco" [ngClass]="{'is-invalid': registerForm.get('endereco').errors &&
-                      registerForm.get('endereco').touched }" placeholder="Endereço" />
-              <div *ngIf="registerForm.get('endereco').hasError('required') &&
-        registerForm.get('endereco').touched" class="invalid-feedback">
+              <input type="text" class="form-control" formControlName="rua" [ngClass]="{'is-invalid': registerForm.get('rua').errors &&
+                      registerForm.get('rua').touched }" placeholder="Endereço" />
+              <div *ngIf="registerForm.get('rua').hasError('required') &&
+        registerForm.get('rua').touched" class="invalid-feedback">
                 Por favor, digite um endereço válido.
               </div>
             </div>

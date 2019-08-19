@@ -4,14 +4,14 @@ export class User {
     password: string;
     fullName: string;
     cpf: string;
-    dataDeNascimento: string;
+    dataDeNascimento: Date;
     sexo: string;
     estadoCivil: string;
     rg: string;
-    telefoneCelular: string;
+    celular: string;
     telefoneResidencial: string;
     telefoneComercial: string;
-    endereco: string;
+    rua: string;
     numero: string;
     complemento: string;
     bairro: string;

@@ -23,6 +23,11 @@ export class LoginComponent implements OnInit {
     , public router: Router
     , private toastr: ToastrService) { }
 
+  limparStorage(name: string) {
+    localStorage.clear();
+    sessionStorage.clear();
+  }
+
 
   // Method to sign in with facebook.
   signIn(platform: string): void {
@@ -53,7 +58,7 @@ export class LoginComponent implements OnInit {
     }
 
     // tslint:disable-next-line: only-arrow-functions
-    (window as any).fbAsyncInit = function() {
+    (window as any).fbAsyncInit = function () {
       FB.init({
         appId: '383913478995156',
         cookie: true,

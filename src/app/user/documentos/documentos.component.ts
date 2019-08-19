@@ -1,11 +1,12 @@
-import { Component, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, OnDestroy, AfterViewInit, LOCALE_ID } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 import { map, tap, takeUntil, filter } from 'rxjs/operators';
 import { debounceTime } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 import { contains } from 'ramda';
 import { UppyService } from 'src/app/uppy/uppy.service';
-
+import { Uppy } from '@uppy/core';
+declare var require: any;
 
 @Component({
   selector: 'app-documentos',
@@ -28,13 +29,17 @@ export class DocumentosComponent implements OnDestroy, AfterViewInit {
 
   ngAfterViewInit() {
     const uppy = this.uppyService.uppy;
-    const instance3 = uppy.Core({ autoProceed: false })
+    const brazil = require('@uppy/locales/lib/pt_BR');
+    const instance3 = uppy.Core({
+      autoProceed: false,
+      locale: brazil
+    })
       .use(uppy.Dashboard, {
         target: '.instance3',
         replaceTargetContent: true,
         inline: true,
       })
-      // .use(uppy.Tus, { endpoint: 'https://master.tus.io/files/' })
+      .use(uppy.Tus, { endpoint: 'https://master.tus.io/files/' })
       .use(uppy.Webcam, { target: uppy.Dashboard })
       .run();
 
