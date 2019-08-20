@@ -15,9 +15,6 @@ import { ToastrModule } from 'ngx-toastr';
 // Ngx Bootstrap
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
-// Uppy Module
-import { UppyModule } from './uppy/uppy.module';
-
 // Ngx Mask
 import { NgxMaskModule } from 'ngx-mask';
 
@@ -26,10 +23,9 @@ import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { HomeComponent } from './home/home.component';
 import { UserComponent } from './user/user.component';
+import { DocumentosComponent } from './user/documentos//documentos.component';
 import { LoginComponent } from './user/login/login.component';
 import { RegistrationComponent } from './user/registration/registration.component';
-import { DocumentosComponent } from './user/documentos/documentos.component';
-
 // Client id for the facebook oauth. This is used for validation of our application to facebook.
 // https://developers.facebook.com/
 // tslint:disable-next-line: variable-name
@@ -53,9 +49,9 @@ export function provideConfig() {
    declarations: [
       AppComponent,
       NavComponent,
-      DocumentosComponent,
       HomeComponent,
       UserComponent,
+      DocumentosComponent,
       LoginComponent,
       RegistrationComponent
    ],
@@ -71,8 +67,7 @@ export function provideConfig() {
       }),
       SocialLoginModule.initialize(config),
       HttpClientModule,
-      AppRoutingModule,
-      UppyModule,
+      AppRoutingModule
    ],
    providers: [
       {

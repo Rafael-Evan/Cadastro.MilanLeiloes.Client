@@ -1,16 +1,15 @@
 <br>
 <div class="container-fluid">
   <div class="row">
-      <div class="col-lg-2">
-          <h1>Cadastro</h1>
-          <div class="list-group">
-            <a class="list-group-item active">Informações Pessoais</a>
-            <a class="list-group-item">Category 2</a>
-            <a class="list-group-item">Category 3</a>
-          </div>
-        </div>
+    <div class="col-lg-2">
+      <h1>Cadastro</h1>
+      <div class="list-group">
+        <a class="list-group-item active">Informações Pessoais</a>
+        <a class="list-group-item">Documentos</a>
+      </div>
+    </div>
     <div class="col-sm-0">
-      <div class="well navbar-light" >
+      <div class="well navbar-light">
         <h4>Informações Pessoais</h4>
         <form [formGroup]="registerForm">
           <div class="form-row col-md-12">
@@ -57,15 +56,15 @@
               <input value="{{socialUser.email}}" class="form-control" type="readonly" formControlName="email" placeholder="Insira o E-mail" />
             </div> -->
             <div class="form-group col-md-7 mb-2">
-                <label for="">Email:</label>
-                <input class="form-control" type="text" formControlName="email" [ngClass]="{ 'is-invalid': registerForm.get('email').errors && 
+              <label for="">Email:</label>
+              <input class="form-control" type="text" formControlName="email" [ngClass]="{ 'is-invalid': registerForm.get('email').errors && 
                                                          registerForm.get('email').touched}"
-                  placeholder="Insira o E-mail" />
-                <div *ngIf="registerForm.get('email').hasError('required') &&
+                placeholder="Insira o E-mail" />
+              <div *ngIf="registerForm.get('email').hasError('required') &&
                                         registerForm.get('email').touched" class="invalid-feedback">
-                  email é obrigatório.
-                </div>
+                email é obrigatório.
               </div>
+            </div>
             <div class="form-group col-5 mb-3">
               <label for="">Usuario:</label>
               <input class="form-control" type="text" formControlName="userName" [ngClass]="{'is-invalid': registerForm.get('userName').errors &&
@@ -132,11 +131,12 @@
             </div>
           </div>
           <div class="form-row col-md-12">
-            <label for="sexo" class="control-label">&nbsp;&nbsp;Sexo&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <label for="sexo"
+              class="control-label">&nbsp;&nbsp;Sexo&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
             <div id="sexo" class="row">
               <div class="custom-radio custom-control-inline" *ngFor="let item of sexoOp">
                 <label class="radio-inline" for="customRadioInline1">
-                    <input type="radio" [value]="item.name" formControlName="sexo">{{item.name}}
+                  <input type="radio" [value]="item.name" formControlName="sexo">{{item.name}}
                 </label>
               </div>
             </div>
@@ -156,8 +156,7 @@
             </div>
             <div class="form-group col-md-6 mb-2">
               <label for="validationCustom03">Celular</label>
-              <input mask="(00) 00000-0000" type="text" class="form-control" formControlName="celular"
-                [ngClass]="{'is-invalid': registerForm.get('celular').errors &&
+              <input mask="(00) 00000-0000" type="text" class="form-control" formControlName="celular" [ngClass]="{'is-invalid': registerForm.get('celular').errors &&
                         registerForm.get('celular').touched }" placeholder="DDD + Celular" />
               <div *ngIf="registerForm.get('celular').hasError('required') &&
           registerForm.get('celular').touched" class="invalid-feedback">
@@ -251,7 +250,11 @@
           </div>
           <div class="form-row col-md-12">
             <div class="form-group col-md-5">
-              <button class="btn btn-lg btn-success btn-block" (click)="cadastrarUsuario()">Registar</button>
+              <button class="btn btn-lg btn-success btn-block" (click)="cadastrarUsuario()">Avançar</button>
+            </div>
+            <div class="form-group col-md-5">
+              <button class="btn btn-lg btn-light btn-block"
+                (click)="router.navigate(['/user/login'])">voltar</button>
             </div>
           </div>
         </form>

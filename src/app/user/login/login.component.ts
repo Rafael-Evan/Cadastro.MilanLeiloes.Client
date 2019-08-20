@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
               this.router.navigate(['/home']);
             },
             error => {
-              this.router.navigate(['/user/registration']);
+              this.router.navigate(['/user/registrar']);
             }
           );
       }
@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
     }
 
     // tslint:disable-next-line: only-arrow-functions
-    (window as any).fbAsyncInit = function () {
+    (window as any).fbAsyncInit = function() {
       FB.init({
         appId: '383913478995156',
         cookie: true,
@@ -92,8 +92,7 @@ export class LoginComponent implements OnInit {
                 this.router.navigate(['/home']);
               },
               error => {
-                this.router.navigate(['/user/registration'],
-                  { queryParams: { 'Social': this.user } }
+                this.router.navigate(['/user/registrar']
                 );
               }
             );

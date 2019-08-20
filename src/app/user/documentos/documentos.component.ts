@@ -1,49 +1,74 @@
-import { Component, OnDestroy, AfterViewInit, LOCALE_ID } from '@angular/core';
-import { Subject, Observable } from 'rxjs';
-import { map, tap, takeUntil, filter } from 'rxjs/operators';
-import { debounceTime } from 'rxjs/operators';
+import { Component, OnInit } from '@angular/core';
+import { MilanDocumentosService } from 'src/app/_services/milan-documentos.service';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { contains } from 'ramda';
-import { UppyService } from 'src/app/uppy/uppy.service';
-import { Uppy } from '@uppy/core';
+import { Documentos } from 'src/app/_models/Documentos';
 declare var require: any;
+
 
 @Component({
   selector: 'app-documentos',
   templateUrl: './documentos.component.html',
   styleUrls: ['./documentos.component.css']
 })
-export class DocumentosComponent implements OnDestroy, AfterViewInit {
+export class DocumentosComponent implements OnInit {
 
-  uppyEvent = new Subject<[string, any, any, any]>();
+  documentos: Documentos;
 
-  onDestroy$ = new Subject<void>();
+  constructor(private authService: MilanDocumentosService,
+    public router: Router
+    , private toastr: ToastrService) { }
 
-  constructor(private toastr: ToastrService, private uppyService: UppyService) {
-  }
-
-  ngOnDestroy() {
-    this.onDestroy$.next();
-    this.onDestroy$.complete();
-  }
-
-  ngAfterViewInit() {
-    const uppy = this.uppyService.uppy;
+  ngOnInit() {
+    const Uppy = require('@uppy/core');
+    const Dashboard = require('@uppy/dashboard');
+    const Webcam = require('@uppy/webcam');
+    const Tus = require('@uppy/tus');
     const brazil = require('@uppy/locales/lib/pt_BR');
-    const instance3 = uppy.Core({
-      autoProceed: false,
-      locale: brazil
-    })
-      .use(uppy.Dashboard, {
-        target: '.instance3',
-        replaceTargetContent: true,
-        inline: true,
-      })
-      .use(uppy.Tus, { endpoint: 'https://master.tus.io/files/' })
-      .use(uppy.Webcam, { target: uppy.Dashboard })
-      .run();
 
-    instance3.on("complete", (data) => this.toastr.success("Received 'complete' event from instance 3", 'Upload complete'));
+    const uppy = Uppy({
+      debug: true,
+      autoProceed: false,
+      locale: brazil,
+      restrictions: {
+        maxFileSize: 2000000,
+        maxNumberOfFiles: 3,
+        minNumberOfFiles: 2,
+        allowedFileTypes: ['image/*']
+      }
+    })
+      .use(Dashboard, {
+        trigger: '.UppyModalOpenerBtn',
+        inline: true,
+        target: '.DashboardContainer',
+        replaceTargetContent: true,
+        showProgressDetails: true,
+        note: 'Inserir uma foto do documento RG ou CNH  -  Aberto (Frente e Verso)',
+        height: 450,
+        metaFields: [
+          { id: 'name', name: 'Name', placeholder: 'file name' },
+          { id: 'caption', name: 'Caption', placeholder: 'describe what the image is about' }
+        ],
+        browserBackButtonClose: true
+      })
+      .use(Webcam, { target: Dashboard })
+      .use(Tus, { endpoint: 'https://master.tus.io/files/' });
+
+    uppy.on('complete', result => {
+      if (result.successful !== []) {
+        this.documentos.extension = result.successful[0].extension;
+        // this.documentos.name = result.successful[0].name;
+        this.authService.documentos(this.documentos).subscribe(
+          () => {
+            this.router.navigate(['/Login']);
+            this.toastr.error('Cadastro Finalizado com sucesso!');
+          }, error => {
+            this.toastr.error('Erro ao enviar os documentos!');
+          });
+      }
+      console.log('successful files:', result.successful);
+      console.log('failed files:', result.failed);
+    });
   }
 
 }
