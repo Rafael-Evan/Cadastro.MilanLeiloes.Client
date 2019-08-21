@@ -115,7 +115,8 @@ export class RegistrationComponent implements OnInit {
         this.registerForm.value);
       this.authService.register(this.user).subscribe(
         () => {
-          this.router.navigate(['/Documentos']);
+          sessionStorage.setItem('Email', this.user.email);
+          this.router.navigate(['/user/documentos']);
         }, error => {
           const erro = error.error;
           erro.array.forEach(element => {

@@ -13,7 +13,9 @@ declare var require: any;
 })
 export class DocumentosComponent implements OnInit {
 
-  documentos: Documentos;
+  documentos: Array<Documentos>;
+  // documentos = new Documentos();
+  email: any;
 
   constructor(private authService: MilanDocumentosService,
     public router: Router
@@ -23,7 +25,7 @@ export class DocumentosComponent implements OnInit {
     const Uppy = require('@uppy/core');
     const Dashboard = require('@uppy/dashboard');
     const Webcam = require('@uppy/webcam');
-    const Tus = require('@uppy/tus');
+    const XHRUpload = require('@uppy/xhr-upload');
     const brazil = require('@uppy/locales/lib/pt_BR');
 
     const uppy = Uppy({
@@ -52,13 +54,20 @@ export class DocumentosComponent implements OnInit {
         browserBackButtonClose: true
       })
       .use(Webcam, { target: Dashboard })
-      .use(Tus, { endpoint: 'https://master.tus.io/files/' });
+      .use(XHRUpload, {
+        endpoint: 'https://localhost:44378/Upload',
+        formData: true,
+        fieldName: 'files',
+      });
 
     uppy.on('complete', result => {
+      this.documentos = result.successful;
+
+      this.email = sessionStorage.getItem('Email');
+      sessionStorage.clear();
+
       if (result.successful !== []) {
-        this.documentos.extension = result.successful[0].extension;
-        // this.documentos.name = result.successful[0].name;
-        this.authService.documentos(this.documentos).subscribe(
+        this.authService.documentos(this.documentos, this.email).subscribe(
           () => {
             this.router.navigate(['/Login']);
             this.toastr.error('Cadastro Finalizado com sucesso!');
