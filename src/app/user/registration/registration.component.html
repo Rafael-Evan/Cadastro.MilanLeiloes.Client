@@ -19,7 +19,7 @@
                                                     registerForm.get('fullName').touched }"
                 placeholder="Insira o Nome Completo" />
             </div> -->
-            <div class="form-group required col-12">
+            <div class="form-group required col-md-8 mb-2">
               <label for="">Nome Completo:</label>
               <input type="text" class="form-control" formControlName="fullName" [ngClass]="{'is-invalid': registerForm.get('fullName').errors &&
                                                     registerForm.get('fullName').touched }"
@@ -27,6 +27,15 @@
               <div *ngIf="registerForm.get('fullName').hasError('required') &&
                                       registerForm.get('fullName').touched" class="invalid-feedback">
                 Nome Completo é obrigatório.
+              </div>
+            </div>
+            <div class="form-group col-4 mb-2">
+              <label for="">Usuario:</label>
+              <input class="form-control" type="text" formControlName="userName" [ngClass]="{'is-invalid': registerForm.get('userName').errors &&
+                                                      registerForm.get('userName').touched}" placeholder="Usuário" />
+              <div *ngIf="registerForm.get('userName').hasError('required') &&
+                                      registerForm.get('userName').touched" class="invalid-feedback">
+                Usuário é obrigatório.
               </div>
             </div>
           </div>
@@ -55,7 +64,7 @@
               <label for="">Email:</label>
               <input value="{{socialUser.email}}" class="form-control" type="readonly" formControlName="email" placeholder="Insira o E-mail" />
             </div> -->
-            <div class="form-group col-md-7 mb-2">
+            <div class="form-group col-md-12 mb-2">
               <label for="">Email:</label>
               <input class="form-control" type="text" formControlName="email" [ngClass]="{ 'is-invalid': registerForm.get('email').errors && 
                                                          registerForm.get('email').touched}"
@@ -63,15 +72,6 @@
               <div *ngIf="registerForm.get('email').hasError('required') &&
                                         registerForm.get('email').touched" class="invalid-feedback">
                 email é obrigatório.
-              </div>
-            </div>
-            <div class="form-group col-5 mb-3">
-              <label for="">Usuario:</label>
-              <input class="form-control" type="text" formControlName="userName" [ngClass]="{'is-invalid': registerForm.get('userName').errors &&
-                                                      registerForm.get('userName').touched}" placeholder="Usuário" />
-              <div *ngIf="registerForm.get('userName').hasError('required') &&
-                                      registerForm.get('userName').touched" class="invalid-feedback">
-                Usuário é obrigatório.
               </div>
             </div>
           </div>
@@ -179,6 +179,29 @@
           <br>
           <h4>Endereço</h4>
           <div class="form-row col-md-12">
+            <div class="form-group col-md-6 mb-2">
+              <label for="validationCustom03">CEP</label>
+              <input mask="00000-000" type="text" class="form-control" formControlName="cep" [ngClass]="{'is-invalid': registerForm.get('cep').errors &&
+                            registerForm.get('cep').touched }" placeholder="CEP" (blur)="consultaCEP($event.target.value)"/>
+              <div *ngIf="registerForm.get('cep').hasError('required') &&
+              registerForm.get('cep').touched" class="invalid-feedback">
+                Por favor, escolha um cep.
+              </div>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="validationCustomUsername">Estado</label>
+              <select class="form-control" id="Estado" formControlName="estado" placeholder="estado">
+                <option *ngFor="let state of states" [ngValue]="state.abbrev">
+                  {{ state.abbrev }}
+                </option>
+              </select>
+              <div *ngIf="registerForm.get('estado').hasError('required') &&
+          registerForm.get('estado').touched" class="invalid-feedback">
+                Por favor, escolha um estado.
+              </div>
+            </div>
+          </div>
+          <div class="form-row col-md-12">
             <div class="form-group col-md-8 mb-2">
               <label for="validationCustom03">Endereço</label>
               <input type="text" class="form-control" formControlName="rua" [ngClass]="{'is-invalid': registerForm.get('rua').errors &&
@@ -226,35 +249,11 @@
             </div>
           </div>
           <div class="form-row col-md-12">
-            <div class="form-group col-md-6">
-              <label for="validationCustomUsername">Estado</label>
-              <select class="form-control" id="Estado" formControlName="estado" placeholder="estado">
-                <option *ngFor="let state of states" [ngValue]="state.abbrev">
-                  {{ state.abbrev }}
-                </option>
-              </select>
-              <div *ngIf="registerForm.get('estado').hasError('required') &&
-          registerForm.get('estado').touched" class="invalid-feedback">
-                Por favor, escolha um estado.
-              </div>
-            </div>
-            <div class="form-group col-md-6 mb-2">
-              <label for="validationCustom03">CEP</label>
-              <input mask="00000-000" type="text" class="form-control" formControlName="cep" [ngClass]="{'is-invalid': registerForm.get('cep').errors &&
-                        registerForm.get('cep').touched }" placeholder="CEP" />
-              <div *ngIf="registerForm.get('cep').hasError('required') &&
-          registerForm.get('cep').touched" class="invalid-feedback">
-                Por favor, escolha um cep.
-              </div>
-            </div>
-          </div>
-          <div class="form-row col-md-12">
             <div class="form-group col-md-5">
               <button class="btn btn-lg btn-success btn-block" (click)="cadastrarUsuario()">Avançar</button>
             </div>
             <div class="form-group col-md-5">
-              <button class="btn btn-lg btn-light btn-block"
-                (click)="router.navigate(['/user/login'])">voltar</button>
+              <button class="btn btn-lg btn-light btn-block" (click)="router.navigate(['/user/login'])">voltar</button>
             </div>
           </div>
         </form>

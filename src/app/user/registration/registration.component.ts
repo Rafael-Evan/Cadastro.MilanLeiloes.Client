@@ -4,6 +4,9 @@ import { ToastrService } from 'ngx-toastr';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MilanAuthService } from 'src/app/_services/milan-auth.service';
 import { AuthService, GoogleLoginProvider, SocialUser } from 'angularx-social-login';
+import { Http } from '@angular/http';
+import { map } from 'rxjs/operators';
+
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
@@ -56,6 +59,7 @@ export class RegistrationComponent implements OnInit {
     , public fb: FormBuilder
     , private toastr: ToastrService
     , private route: ActivatedRoute
+    , private http: Http
   ) { }
 
   ngOnInit() {
@@ -133,4 +137,55 @@ export class RegistrationComponent implements OnInit {
       );
     }
   }
+
+  consultaCEP(cep) {
+    cep = cep.replace(/\D/g, '');
+
+    // Verifica se o campo cep possui valor informado.
+    // tslint:disable-next-line: triple-equals
+    if (cep != '') {
+
+      // Expressão regular para validar o CEP.
+      // tslint:disable-next-line: prefer-const
+      let validacep = /^[0-9]{8}$/;
+
+      if (validacep.test(cep)) {
+
+        this.resetaDadosFormulario();
+
+        this.http.get(`//viacep.com.br/ws/${cep}/json`).pipe(
+          map(dados => dados.json())
+        ).subscribe(dados => this.populaDadosForm(dados));
+      }
+    }
+  }
+
+  populaDadosForm(dados) {
+    this.registerForm.patchValue({
+      rua: dados.logradouro,
+      complemento: dados.complemento,
+      bairro: dados.bairro,
+      cidade: dados.localidade,
+      estado: dados.uf,
+      cep: dados.cep,
+    });
+  }
+
+  resetaDadosFormulario() {
+    this.registerForm.patchValue({
+      rua: null,
+      complemento: null,
+      bairro: null,
+      cidade: null,
+      estado: null,
+      cep: null,
+    });
+  }
+
+ /*  preencherDadosSocialLogin() {
+    this.registerForm.patchValue({
+      fullName: [this._socioAuthServ._user == null ? '' : this._socioAuthServ._user.name, Validators.required],
+      email: [this._socioAuthServ._user == null ? '' : this._socioAuthServ._user.email, [Validators.required, Validators.email]],
+    });
+  } */
 }

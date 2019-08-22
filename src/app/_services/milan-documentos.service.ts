@@ -15,7 +15,7 @@ export class MilanDocumentosService {
 
 constructor(private http: HttpClient) { }
 
-documentos(documentos: Array<Documentos>, email: any) {
+documentos(documentos: Array<Documentos>) {
   // const headers = new HttpHeaders({
   //   'Content-Type': 'application/json'
   // });
@@ -23,7 +23,7 @@ documentos(documentos: Array<Documentos>, email: any) {
   //   headers: headers
   // };
   return this.http
-    .post(`${this.baseUrl}documentos`, documentos, email);
+    .post(`${this.baseUrl}documentos`, documentos);
 }
 
 }

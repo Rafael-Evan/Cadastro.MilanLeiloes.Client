@@ -13,7 +13,7 @@ declare var require: any;
 })
 export class DocumentosComponent implements OnInit {
 
-  documentos: Array<Documentos>;
+  // documentos: Array<Documentos>;
   // documentos = new Documentos();
   email: any;
 
@@ -27,6 +27,7 @@ export class DocumentosComponent implements OnInit {
     const Webcam = require('@uppy/webcam');
     const XHRUpload = require('@uppy/xhr-upload');
     const brazil = require('@uppy/locales/lib/pt_BR');
+    this.email = sessionStorage.getItem('Email');
 
     const uppy = Uppy({
       debug: true,
@@ -46,7 +47,7 @@ export class DocumentosComponent implements OnInit {
         replaceTargetContent: true,
         showProgressDetails: true,
         note: 'Inserir uma foto do documento RG ou CNH  -  Aberto (Frente e Verso)',
-        height: 450,
+        height: 500,
         metaFields: [
           { id: 'name', name: 'Name', placeholder: 'file name' },
           { id: 'caption', name: 'Caption', placeholder: 'describe what the image is about' }
@@ -55,25 +56,25 @@ export class DocumentosComponent implements OnInit {
       })
       .use(Webcam, { target: Dashboard })
       .use(XHRUpload, {
+        method: 'post',
         endpoint: 'https://localhost:44378/Upload',
         formData: true,
         fieldName: 'files',
       });
 
+    uppy.on('file-added', (file) => {
+      uppy.setFileMeta(file.id, {
+        email: this.email
+      });
+    });
+
     uppy.on('complete', result => {
-      this.documentos = result.successful;
-
-      this.email = sessionStorage.getItem('Email');
-      sessionStorage.clear();
-
       if (result.successful !== []) {
-        this.authService.documentos(this.documentos, this.email).subscribe(
-          () => {
-            this.router.navigate(['/Login']);
-            this.toastr.error('Cadastro Finalizado com sucesso!');
-          }, error => {
-            this.toastr.error('Erro ao enviar os documentos!');
-          });
+        this.router.navigate(['user/login']);
+        this.toastr.success('Cadastro Finalizado com sucesso!');
+        sessionStorage.clear();
+      } else {
+        this.toastr.error('Erro ao enviar os documentos!');
       }
       console.log('successful files:', result.successful);
       console.log('failed files:', result.failed);

@@ -43,39 +43,10 @@ export class LoginComponent implements OnInit {
             () => {
               this.router.navigate(['/home']);
             },
-            error => {
-              this.router.navigate(['/user/registrar']);
-            }
           );
+        this.router.navigate(['/user/registrar']);
       }
     );
-  }
-
-  ngOnInit() {
-
-    if (localStorage.getItem('token') !== null) {
-      this.router.navigate(['/home']);
-    }
-
-    // tslint:disable-next-line: only-arrow-functions
-    (window as any).fbAsyncInit = function() {
-      FB.init({
-        appId: '383913478995156',
-        cookie: true,
-        xfbml: true,
-        version: 'v3.1'
-      });
-      FB.AppEvents.logPageView();
-    };
-
-    // tslint:disable-next-line: only-arrow-functions
-    (function (d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) { return; }
-      js = d.createElement(s); js.id = id;
-      js.src = 'https://connect.facebook.net/en_US/sdk.js';
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
   }
 
   signInWithGoogle(): void {
@@ -99,6 +70,35 @@ export class LoginComponent implements OnInit {
         }
       );
   }
+
+  ngOnInit() {
+
+    if (localStorage.getItem('token') !== null) {
+      this.router.navigate(['/home']);
+    }
+
+    // tslint:disable-next-line: only-arrow-functions
+    (window as any).fbAsyncInit = function () {
+      FB.init({
+        appId: '383913478995156',
+        cookie: true,
+        xfbml: true,
+        version: 'v3.1'
+      });
+      FB.AppEvents.logPageView();
+    };
+
+    // tslint:disable-next-line: only-arrow-functions
+    (function (d, s, id) {
+      // tslint:disable-next-line: one-variable-per-declaration
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) { return; }
+      js = d.createElement(s); js.id = id;
+      js.src = 'https://connect.facebook.net/en_US/sdk.js';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  }
+
 
   login() {
     if (this.model.username != null || this.model.password != null) {

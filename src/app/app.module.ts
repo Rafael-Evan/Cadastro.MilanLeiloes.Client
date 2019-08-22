@@ -26,6 +26,7 @@ import { UserComponent } from './user/user.component';
 import { DocumentosComponent } from './user/documentos//documentos.component';
 import { LoginComponent } from './user/login/login.component';
 import { RegistrationComponent } from './user/registration/registration.component';
+import { HttpModule } from '@angular/http';
 // Client id for the facebook oauth. This is used for validation of our application to facebook.
 // https://developers.facebook.com/
 // tslint:disable-next-line: variable-name
@@ -67,7 +68,8 @@ export function provideConfig() {
       }),
       SocialLoginModule.initialize(config),
       HttpClientModule,
-      AppRoutingModule
+      AppRoutingModule,
+      HttpModule
    ],
    providers: [
       {
