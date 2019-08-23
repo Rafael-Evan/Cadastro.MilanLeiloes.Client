@@ -35,7 +35,7 @@ export class DocumentosComponent implements OnInit {
       locale: brazil,
       restrictions: {
         maxFileSize: 2000000,
-        maxNumberOfFiles: 3,
+        maxNumberOfFiles: 2,
         minNumberOfFiles: 2,
         allowedFileTypes: ['image/*']
       }

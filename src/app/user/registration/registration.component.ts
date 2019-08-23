@@ -54,12 +54,12 @@ export class RegistrationComponent implements OnInit {
   ];
 
   constructor(private authService: MilanAuthService
-    , private _socioAuthServ: AuthService
-    , public router: Router
-    , public fb: FormBuilder
-    , private toastr: ToastrService
-    , private route: ActivatedRoute
-    , private http: Http
+    ,         private _socioAuthServ: AuthService
+    ,         public router: Router
+    ,         public fb: FormBuilder
+    ,         private toastr: ToastrService
+    ,         private route: ActivatedRoute
+    ,         private http: Http
   ) { }
 
   ngOnInit() {
@@ -78,7 +78,7 @@ export class RegistrationComponent implements OnInit {
     this.registerForm = this.fb.group({
       fullName: [this._socioAuthServ._user == null ? '' : this._socioAuthServ._user.name, Validators.required],
       email: [this._socioAuthServ._user == null ? '' : this._socioAuthServ._user.email, [Validators.required, Validators.email]],
-      userName: ['', Validators.required],
+      apelido: ['', Validators.required],
       cpf: ['', Validators.required],
       dataDeNascimento: ['', Validators.required],
       sexo: [''],
@@ -178,14 +178,7 @@ export class RegistrationComponent implements OnInit {
       bairro: null,
       cidade: null,
       estado: null,
-      cep: null,
     });
   }
 
- /*  preencherDadosSocialLogin() {
-    this.registerForm.patchValue({
-      fullName: [this._socioAuthServ._user == null ? '' : this._socioAuthServ._user.name, Validators.required],
-      email: [this._socioAuthServ._user == null ? '' : this._socioAuthServ._user.email, [Validators.required, Validators.email]],
-    });
-  } */
 }

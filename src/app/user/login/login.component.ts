@@ -29,26 +29,6 @@ export class LoginComponent implements OnInit {
   }
 
 
-  // Method to sign in with facebook.
-  signIn(platform: string): void {
-    platform = FacebookLoginProvider.PROVIDER_ID;
-    this._socioAuthServ.signIn(platform).then(
-      (response) => {
-        console.log(response);
-        this.user = response;
-        this.email = this.user.email;
-
-        this.authService.socialLogin(this.email)
-          .subscribe(
-            () => {
-              this.router.navigate(['/home']);
-            },
-          );
-        this.router.navigate(['/user/registrar']);
-      }
-    );
-  }
-
   signInWithGoogle(): void {
     this._socioAuthServ.
       signIn(GoogleLoginProvider.PROVIDER_ID).
@@ -78,17 +58,6 @@ export class LoginComponent implements OnInit {
     }
 
     // tslint:disable-next-line: only-arrow-functions
-    (window as any).fbAsyncInit = function () {
-      FB.init({
-        appId: '383913478995156',
-        cookie: true,
-        xfbml: true,
-        version: 'v3.1'
-      });
-      FB.AppEvents.logPageView();
-    };
-
-    // tslint:disable-next-line: only-arrow-functions
     (function (d, s, id) {
       // tslint:disable-next-line: one-variable-per-declaration
       var js, fjs = d.getElementsByTagName(s)[0];
@@ -99,9 +68,29 @@ export class LoginComponent implements OnInit {
     }(document, 'script', 'facebook-jssdk'));
   }
 
+    // Method to sign in with facebook.
+    signIn(platform: string): void {
+      platform = FacebookLoginProvider.PROVIDER_ID;
+      this._socioAuthServ.signIn(platform).then(
+        (response) => {
+          console.log(response);
+          this.user = response;
+          this.email = this.user.email;
+  
+          this.authService.socialLogin(this.email)
+            .subscribe(
+              () => {
+                this.router.navigate(['/home']);
+              },
+            );
+          this.router.navigate(['/user/registrar']);
+        }
+      );
+    }
+
 
   login() {
-    if (this.model.username != null || this.model.password != null) {
+    if (this.model.email != null || this.model.password != null) {
       this.authService.login(this.model)
         .subscribe(
           () => {

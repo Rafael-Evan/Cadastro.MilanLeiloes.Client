@@ -20,7 +20,7 @@
                 placeholder="Insira o Nome Completo" />
             </div> -->
             <div class="form-group required col-md-8 mb-2">
-              <label for="">Nome Completo:</label>
+              <label for="">Nome Completo</label>
               <input type="text" class="form-control" formControlName="fullName" [ngClass]="{'is-invalid': registerForm.get('fullName').errors &&
                                                     registerForm.get('fullName').touched }"
                 placeholder="Insira o Nome Completo" />
@@ -30,12 +30,12 @@
               </div>
             </div>
             <div class="form-group col-4 mb-2">
-              <label for="">Usuario:</label>
-              <input class="form-control" type="text" formControlName="userName" [ngClass]="{'is-invalid': registerForm.get('userName').errors &&
-                                                      registerForm.get('userName').touched}" placeholder="Usuário" />
-              <div *ngIf="registerForm.get('userName').hasError('required') &&
-                                      registerForm.get('userName').touched" class="invalid-feedback">
-                Usuário é obrigatório.
+              <label for="">Apelido</label>
+              <input class="form-control" type="text" formControlName="apelido" [ngClass]="{'is-invalid': registerForm.get('apelido').errors &&
+                                                      registerForm.get('apelido').touched}" placeholder="Apelido" />
+              <div *ngIf="registerForm.get('apelido').hasError('required') &&
+                                      registerForm.get('apelido').touched" class="invalid-feedback">
+                Apelido é obrigatório.
               </div>
             </div>
           </div>

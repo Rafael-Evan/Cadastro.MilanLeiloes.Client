@@ -14,7 +14,7 @@
   <div *ngIf="loggedIn()" class="btn-group">
     <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
       aria-expanded="false">
-      <a class="fas fa-user"> Olá {{authService.decodedToken?.unique_name}}</a>
+      <a class="fas fa-user"> Olá {{userName()}}</a>
     </button>
     <div class="dropdown-menu dropdown-menu-right">
       <form class="col-12 col-md-12">
