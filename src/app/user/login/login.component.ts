@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
       signIn(GoogleLoginProvider.PROVIDER_ID).
       then(
         (response) => {
-          console.log(response);
+          // console.log(response);
           this.user = response;
           this.email = this.user.email;
           this.authService.socialLogin(this.email)
@@ -73,7 +73,7 @@ export class LoginComponent implements OnInit {
       platform = FacebookLoginProvider.PROVIDER_ID;
       this._socioAuthServ.signIn(platform).then(
         (response) => {
-          console.log(response);
+          // console.log(response);
           this.user = response;
           this.email = this.user.email;
   

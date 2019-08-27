@@ -2,18 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { MilanDocumentosService } from 'src/app/_services/milan-documentos.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Documentos } from 'src/app/_models/Documentos';
+
 declare var require: any;
 
-
 @Component({
-  selector: 'app-documentos',
-  templateUrl: './documentos.component.html',
-  styleUrls: ['./documentos.component.css']
+  selector: 'app-selfie',
+  templateUrl: './selfie.component.html',
+  styleUrls: ['./selfie.component.css']
 })
-export class DocumentosComponent implements OnInit {
+export class SelfieComponent implements OnInit {
 
-  // documentos: Array<Documentos>;
+ // documentos: Array<Documentos>;
   // documentos = new Documentos();
   email: any;
 
@@ -46,7 +45,7 @@ export class DocumentosComponent implements OnInit {
         target: '.DashboardContainer',
         replaceTargetContent: true,
         showProgressDetails: true,
-        note: 'Inserir uma foto de um documento RG ou CNH - Aberto (Frente e Verso)',
+        note: 'Tirar uma selfie com o documento cadastro na mão',
         height: 500,
         metaFields: [
           { id: 'name', name: 'Name', placeholder: 'file name' },
@@ -60,7 +59,6 @@ export class DocumentosComponent implements OnInit {
         endpoint: 'https://localhost:44378/Upload',
         formData: true,
         fieldName: 'files',
-        type: 'image/png',
       });
 
     uppy.on('file-added', (file) => {
@@ -71,9 +69,11 @@ export class DocumentosComponent implements OnInit {
 
     uppy.on('complete', result => {
       if (result.successful !== []) {
-        this.router.navigate(['user/selfie']);
+        this.router.navigate(['user/login']);
+        this.toastr.success('Cadastro Finalizado com sucesso!');
+        sessionStorage.clear();
       } else {
-        this.toastr.error('Erro ao enviar os documentos!');
+        this.toastr.error('Erro ao enviar a foto com o documento!');
       }
       console.log('successful files:', result.successful);
       console.log('failed files:', result.failed);

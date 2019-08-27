@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -6,6 +6,7 @@ import { MilanAuthService } from 'src/app/_services/milan-auth.service';
 import { AuthService, GoogleLoginProvider, SocialUser } from 'angularx-social-login';
 import { Http } from '@angular/http';
 import { map } from 'rxjs/operators';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-registration',
@@ -17,7 +18,6 @@ export class RegistrationComponent implements OnInit {
   user: any;
   registerForm: FormGroup;
   sexoOp: any[];
-
 
   civil = [
     { name: 'Solteiro(a)' },
@@ -72,7 +72,7 @@ export class RegistrationComponent implements OnInit {
       { name: 'Masculino', abbrev: 'M' },
       { name: 'Feminimo', abbrev: 'F' },
     ];
-  }
+}
 
   validation() {
     this.registerForm = this.fb.group({
@@ -120,7 +120,7 @@ export class RegistrationComponent implements OnInit {
       this.authService.register(this.user).subscribe(
         () => {
           sessionStorage.setItem('Email', this.user.email);
-          this.router.navigate(['/user/documentos']);
+          this.router.navigate(['/user/documento']);
         }, error => {
           const erro = error.error;
           erro.array.forEach(element => {
