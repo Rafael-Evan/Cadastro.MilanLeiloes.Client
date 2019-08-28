@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -7,6 +7,7 @@ import { AuthService, GoogleLoginProvider, SocialUser } from 'angularx-social-lo
 import { Http } from '@angular/http';
 import { map } from 'rxjs/operators';
 import * as $ from 'jquery';
+
 
 @Component({
   selector: 'app-registration',
@@ -54,17 +55,25 @@ export class RegistrationComponent implements OnInit {
   ];
 
   constructor(private authService: MilanAuthService
-    ,         private _socioAuthServ: AuthService
-    ,         public router: Router
-    ,         public fb: FormBuilder
-    ,         private toastr: ToastrService
-    ,         private route: ActivatedRoute
-    ,         private http: Http
+    , private _socioAuthServ: AuthService
+    , public router: Router
+    , public fb: FormBuilder
+    , private toastr: ToastrService
+    , private route: ActivatedRoute
+    , private http: Http
   ) { }
 
   ngOnInit() {
     this.validation();
     this.sexoOp = this.getSexo();
+
+    $(document).ready(function () {
+      $('.box').hide();
+      $('#dropdown').change(function () {
+        $('.box').hide();
+        $('#div' + $(this).val()).show();
+      });
+    });
   }
 
   getSexo() {
@@ -72,18 +81,18 @@ export class RegistrationComponent implements OnInit {
       { name: 'Masculino', abbrev: 'M' },
       { name: 'Feminimo', abbrev: 'F' },
     ];
-}
+  }
 
   validation() {
     this.registerForm = this.fb.group({
-      fullName: [this._socioAuthServ._user == null ? '' : this._socioAuthServ._user.name, Validators.required],
+      fullName: [this._socioAuthServ._user == null ? '' : this._socioAuthServ._user.name],
       email: [this._socioAuthServ._user == null ? '' : this._socioAuthServ._user.email, [Validators.required, Validators.email]],
-      apelido: ['', Validators.required],
-      cpf: ['', Validators.required],
-      dataDeNascimento: ['', Validators.required],
+      apelido: [''],
+      cpf: [''],
+      dataDeNascimento: [''],
       sexo: [''],
-      estadoCivil: ['', Validators.required],
-      rg: ['', Validators.required],
+      estadoCivil: [''],
+      rg: [''],
       celular: ['', Validators.required],
       telefoneResidencial: ['', Validators.required],
       telefoneComercial: ['', Validators.required],
@@ -94,6 +103,10 @@ export class RegistrationComponent implements OnInit {
       cidade: ['', Validators.required],
       estado: ['', Validators.required],
       cep: ['', Validators.required],
+      razaoSocial: [''],
+      nomeFantasia: [''],
+      cnpj: [''],
+      inscricaoEstadual: [''],
       passwords: this.fb.group({
         password: ['', [Validators.required, Validators.minLength(6)]],
         confirmPassword: ['', Validators.required]

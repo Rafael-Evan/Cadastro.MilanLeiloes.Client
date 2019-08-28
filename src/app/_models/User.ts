@@ -18,4 +18,8 @@ export class User {
     cidade: string;
     estado: string;
     cep: string;
+    razaoSocial: string;
+    nomeFantasia: string;
+    cnpj: string;
+    inscricaoEstadual: string;
 }
