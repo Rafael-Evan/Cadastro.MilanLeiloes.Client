@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { MilanDocumentosService } from 'src/app/_services/milan-documentos.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Documentos } from 'src/app/_models/Documentos';
 declare var require: any;
 
 
