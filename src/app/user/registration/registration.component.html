@@ -1,16 +1,170 @@
-<script>
-</script>
+<div class="container-fluid register">
+  <div class="row">
+    <div class="col-md-3 register-left">
+      <img src="assets/img/MilanLeiloes_logo.png" alt="" />
+      <h3>Bem Vindo!</h3>
+      <p>The purpose of gathering the information on this page is so we
+        can contact you if there is a problem with your listing. The information on this
+        page will not be divulged to anyone else or used for any other purpose.</p>
+    </div>
+    <div class="col-md-9 register-right">
+
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+          <h3 class="register-heading">Cadastro Pessoa Física </h3>
+          <form [formGroup]="registerForm">
+            <div class="row register-form">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <input type="text" class="form-control" formControlName="fullName" [ngClass]="{'is-invalid': registerForm.get('fullName').errors &&
+                    registerForm.get('fullName').touched }" placeholder="Nome Completo *" />
+                </div>
+                <div class="form-group">
+                  <input class="form-control" type="text" formControlName="apelido" [ngClass]="{'is-invalid': registerForm.get('apelido').errors &&
+                    registerForm.get('apelido').touched}" placeholder="Apelido" />
+                </div>
+                <div class="form-group">
+                  <input class="form-control" type="text" formControlName="email" [ngClass]="{ 'is-invalid': registerForm.get('email').errors && 
+                    registerForm.get('email').touched}" placeholder="E-mail" />
+                  <div *ngIf="registerForm.get('email').hasError('required') &&
+   registerForm.get('email').touched" class="invalid-feedback">
+                    email é obrigatório.
+                  </div>
+                </div>
+                <div class="form-group">
+                  <input mask="00000-000" type="text" class="form-control" formControlName="cep" [ngClass]="{'is-invalid': registerForm.get('cep').errors &&
+                    registerForm.get('cep').touched }" placeholder="CEP" (blur)="consultaCEP($event.target.value)" />
+                  <div *ngIf="registerForm.get('cep').hasError('required') &&
+      registerForm.get('cep').touched" class="invalid-feedback">
+                    Por favor, escolha um cep.
+                  </div>
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control" placeholder="City" value="" />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <input mask="000.000.000-00" type="text" class="form-control" formControlName="cpf" [ngClass]="{'is-invalid': registerForm.get('cpf').errors &&
+                    registerForm.get('cpf').touched }" placeholder="CPF" />
+                </div>
+                <div class="form-group">
+                  <input mask="00.000.000-0" type="text" class="form-control" formControlName="rg" [ngClass]="{'is-invalid': registerForm.get('rg').errors &&
+                    registerForm.get('rg').touched }" placeholder="RG" />
+                </div>
+
+                <div class="form-group">
+                  <input mask="(00) 00000-0000" type="text" class="form-control" formControlName="celular" [ngClass]="{'is-invalid': registerForm.get('celular').errors &&
+                    registerForm.get('celular').touched }" placeholder="DDD + Celular" />
+                  <div *ngIf="registerForm.get('celular').hasError('required') &&
+      registerForm.get('celular').touched" class="invalid-feedback">
+                    Por favor, digite um celular válido.
+                  </div>
+                </div>
+                <div class="form-group">
+                  <select class="form-control" id="Estado" formControlName="estado" placeholder="estado">
+                    <option *ngFor="let state of states" [ngValue]="state.abbrev">
+                      {{ state.abbrev }}
+                    </option>
+                  </select>
+                  <div *ngIf="registerForm.get('estado').hasError('required') &&
+                registerForm.get('estado').touched" class="invalid-feedback">
+                    Por favor, escolha um estado.
+                  </div>
+                </div>
+                <div class="form-group">
+                  <select class="form-control">
+                    <option class="hidden" selected disabled>State or Province </option>
+                    <option name="AK">AK</option>
+                    <option name="AL">AL</option>
+                    <option name="AR">AR</option>
+                    <option name="AZ">AZ</option>
+                    <option name="CA">CA</option>
+                    <option name="CO">CO</option>
+                    <option name="CT">CT</option>
+                    <option name="DC">DC</option>
+                    <option name="DE">DE</option>
+                    <option name="FL">FL</option>
+                    <option name="GA">GA</option>
+                    <option name="HI">HI</option>
+                    <option name="IA">IA</option>
+                    <option name="ID">ID</option>
+                    <option name="IL">IL</option>
+                    <option name="IN">IN</option>
+                    <option name="KS">KS</option>
+                    <option name="KY">KY</option>
+                    <option name="LA">LA</option>
+                    <option name="MA">MA</option>
+                    <option name="MD">MD</option>
+                    <option name="ME">ME</option>
+                    <option name="MI">MI</option>
+                    <option name="MN">MN</option>
+                    <option name="MO">MO</option>
+                    <option name="MS">MS</option>
+                    <option name="MT">MT</option>
+                    <option name="NC">NC</option>
+                    <option name="ND">ND</option>
+                    <option name="NE">NE</option>
+                    <option name="NH">NH</option>
+                    <option name="NJ">NJ</option>
+                    <option name="NM">NM</option>
+                    <option name="NV">NV</option>
+                    <option name="NY">NY</option>
+                    <option name="OH">OH</option>
+                    <option name="OK">OK</option>
+                    <option name="OR">OR</option>
+                    <option name="PA">PA</option>
+                    <option name="RI">RI</option>
+                    <option name="SC">SC</option>
+                    <option name="SD">SD</option>
+                    <option name="TN">TN</option>
+                    <option name="TX">TX</option>
+                    <option name="UT">UT</option>
+                    <option name="VA">VA</option>
+                    <option name="VT">VT</option>
+                    <option name="WA">WA</option>
+                    <option name="WI">WI</option>
+                    <option name="WV">WV</option>
+                    <option name="WY">WY</option>
+                    <option name="AB">AB</option>
+                    <option name="BC">BC</option>
+                    <option name="MB">MB</option>
+                    <option name="NB">NB</option>
+                    <option name="NL">NL</option>
+                    <option name="NS">NS</option>
+                    <option name="NT">NT</option>
+                    <option name="NU">NU</option>
+                    <option name="ON">ON</option>
+                    <option name="PE">PE</option>
+                    <option name="QC">QC</option>
+                    <option name="SK">SK</option>
+                    <option name="YT">YT</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control" placeholder="Zip Code" value="" />
+                </div>
+                <div class="form-row col-md-12">
+                  <div class="form-group col-md-5">
+                    <button class="btn btn-primary btn-block" (click)="cadastrarUsuario()">Avançar</button>
+                  </div>
+                  <div class="form-group col-md-5">
+                    <button class="btn btn-light btn-block" (click)="router.navigate(['/user/login'])">voltar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
 <br>
 <div class="container-fluid">
   <div class="row">
-    <div class="col-lg-2">
-      <h1>Cadastro</h1>
-      <div class="list-group">
-        <a class="list-group-item active">Informações Pessoais</a>
-        <a class="list-group-item">Documentos</a>
-        <a class="list-group-item">Foto com o documento</a>
-      </div>
-    </div>
     <div class="col-sm-0">
       <div class="well navbar-light">
         <h4>Informações Pessoais</h4>

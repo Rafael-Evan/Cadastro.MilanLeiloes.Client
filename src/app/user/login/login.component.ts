@@ -29,27 +29,27 @@ export class LoginComponent implements OnInit {
   }
 
 
-  signInWithGoogle(): void {
-    this._socioAuthServ.
-      signIn(GoogleLoginProvider.PROVIDER_ID).
-      then(
-        (response) => {
-          // console.log(response);
-          this.user = response;
-          this.email = this.user.email;
-          this.authService.socialLogin(this.email)
-            .subscribe(
-              () => {
-                this.router.navigate(['/home']);
-              },
-              error => {
-                this.router.navigate(['/user/registrar']
-                );
-              }
-            );
-        }
-      );
-  }
+  // signInWithGoogle(): void {
+  //   this._socioAuthServ.
+  //     signIn(GoogleLoginProvider.PROVIDER_ID).
+  //     then(
+  //       (response) => {
+  //         // console.log(response);
+  //         this.user = response;
+  //         this.email = this.user.email;
+  //         this.authService.socialLogin(this.email)
+  //           .subscribe(
+  //             () => {
+  //               this.router.navigate(['/home']);
+  //             },
+  //             error => {
+  //               this.router.navigate(['/user/registrar']
+  //               );
+  //             }
+  //           );
+  //       }
+  //     );
+  //}
 
   ngOnInit() {
 
